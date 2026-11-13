@@ -19,3 +19,4 @@
 # ============================================================
 
 13.11.2026 11:40 | XAUUSD | SELL | 3895 | 3979 | 3846 | AKTİF | Londra seansı
+13.11.2026 15:40 | NVDA | BUY | Talep üzerine | — | — | AKTİF | VIP DUYURU: NVDA (ABD hissesi) toplu giriş. Bu işlem yalnızca özel yatırımcılarımıza özeldir; detaylar ve seviyeler için uzmanınızdan talep edin.
