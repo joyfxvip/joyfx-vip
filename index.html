@@ -203,6 +203,8 @@ body.locked #gate{display:flex}
 .dir{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:8px;font-weight:700;font-size:13px;letter-spacing:1px}
 .dir.buy{background:rgba(63,191,127,.14);color:var(--up);border:1px solid rgba(63,191,127,.4)}
 .dir.sell{background:rgba(224,93,93,.14);color:var(--down);border:1px solid rgba(224,93,93,.4)}
+.dir.info{background:rgba(212,175,55,.14);color:var(--gold2);border:1px solid rgba(212,175,55,.45)}
+.sig-card.info{box-shadow:inset 3px 0 0 var(--gold),0 0 30px rgba(212,175,55,.08);border-color:rgba(212,175,55,.35)}
 .levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(84px,1fr));gap:8px;margin:6px 0 14px}
 .lv{background:#0e0e13;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
 .lv .k{font-size:10.5px;letter-spacing:1.5px;color:var(--mut);text-transform:uppercase}
@@ -963,7 +965,7 @@ function parseSigs(text){
   const isHeader = r => /SEMBOL|SYMBOL|TAR[İI]H/i.test(r.join(" "));
   return rows.filter(r => !isHeader(r)).map((r,i) => {
     const [tarih, sembol, yon, giris, stop, tp, durum, ...not] = r;
-    const dir = /SELL|SAT/i.test(yon) ? "sell" : "buy";
+    const dir = /SELL|SAT/i.test(yon) ? "sell" : /BUY|AL/i.test(yon) ? "buy" : "info";
     const tpRaw = String(tp||"").split("/").map(x=>x.trim()).filter(x=>x && !isNaN(numTR(x)));
     const tps = tpRaw.map(numTR);
     const [stKey, stLbl] = normStatus(durum);
@@ -983,16 +985,17 @@ function tvSym(sym){
   return sym;
 }
 const fmtN = v => isNaN(v) ? "—" : String(v);
+const DIRL = {buy:"▲ BUY", sell:"▼ SELL", info:"📣 DUYURU"}, DIRW = {buy:"BUY", sell:"SELL", info:"DUYURU"};
 function sigCard(s){
   const ps = pipSize(s.sym, s.entry), risk = Math.abs(s.entry - s.sl);
   const tpHtml = s.tps.length ? s.tps.map((t,k)=>`<div class="lv tp"><div class="k">TP${s.tps.length>1?k+1:""}</div><div class="n">${esc(s.raw.t[k])}</div><div class="d">${isNaN(s.entry)?"":Math.round(Math.abs(t-s.entry)/ps)+" pip"}${risk?` · 1:${(Math.abs(t-s.entry)/risk).toFixed(1)}`:""}</div></div>`).join("") : `<div class="lv tp"><div class="k">TP</div><div class="n">—</div></div>`;
   const closed = ["tp","stop","kapali"].includes(s.stKey);
-  const txt = `${CONFIG.marka} VIP İşlem\n${s.sym} ${s.dir==="buy"?"BUY":"SELL"}\nGiriş: ${s.raw.e||"—"}\nStop: ${s.raw.s||"—"}\nTP: ${s.raw.t.join(" / ")||"—"}`;
+  const txt = `${CONFIG.marka} VIP İşlem\n${s.sym} ${DIRW[s.dir]}\nGiriş: ${s.raw.e||"—"}\nStop: ${s.raw.s||"—"}\nTP: ${s.raw.t.join(" / ")||"—"}`;
   return `<div class="sig-card ${s.dir} ${closed?"closed":""}">
     <div class="sig-h">
       <div><div class="sig-sym">${esc(s.sym)}</div><div class="muted small">${esc(s.tarih)}</div></div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
-        <span class="dir ${s.dir}">${s.dir==="buy"?"▲ BUY":"▼ SELL"}</span><span class="st ${s.stKey}">${s.stLbl}</span>
+        <span class="dir ${s.dir}">${DIRL[s.dir]}</span><span class="st ${s.stKey}">${s.stLbl}</span>
       </div>
     </div>
     <div class="levels">
@@ -1004,7 +1007,7 @@ function sigCard(s){
     <div class="sig-actions">
       <button class="btn" data-chart="${esc(tvSym(s.sym))}">📈 Grafik</button>
       <button class="btn" data-copy="${esc(txt)}">📋 Kopyala</button>
-      <a class="btn pri" target="_blank" rel="noopener" href="${waLink(`Merhaba, VIP paneldeki ${s.sym} ${s.dir==="buy"?"BUY":"SELL"} işlemi hakkında görüşmek istiyorum.`)}">💬 Uzmanıma sor</a>
+      <a class="btn pri" target="_blank" rel="noopener" href="${waLink(`Merhaba, VIP paneldeki ${s.sym} ${DIRW[s.dir]} işlemi hakkında görüşmek istiyorum.`)}">💬 Uzmanıma sor</a>
     </div>
   </div>`;
 }
@@ -1016,7 +1019,7 @@ function renderSigs(){
   const b = $("#sigBadge"); if (b){ b.textContent = act.length; b.style.display = act.length ? "" : "none"; }
   const hs = $("#homeSig");
   if (hs){ if (act.length){ const l = act[0];
-      hs.style.display = ""; hs.innerHTML = `<div><span class="st aktif">${act.length} AKTİF VIP İŞLEM</span><h3 style="margin-top:8px">${esc(l.sym)} <span class="dir ${l.dir}" style="font-size:12px">${l.dir==="buy"?"▲ BUY":"▼ SELL"}</span> · Giriş ${esc(l.raw.e)}</h3></div><span class="btn pri">İşlemleri gör →</span>`;
+      hs.style.display = ""; hs.innerHTML = `<div><span class="st aktif">${act.length} AKTİF VIP İŞLEM</span><h3 style="margin-top:8px">${esc(l.sym)} <span class="dir ${l.dir}" style="font-size:12px">${DIRL[l.dir]}</span> · Giriş ${esc(l.raw.e)}</h3></div><span class="btn pri">İşlemleri gör →</span>`;
     } else hs.style.display = "none"; }
   document.querySelectorAll("[data-chart]").forEach(b => b.onclick = () => {
     show("chart"); const sel = $("#symSel"), v = b.dataset.chart;
