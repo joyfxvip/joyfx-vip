@@ -1,0 +1,21 @@
+﻿# ============================================================
+#  JOY FX · VIP İŞLEM ÖNERİLERİ
+# ============================================================
+#  Her satır = 1 işlem. Alanları | işaretiyle ayırın:
+#
+#  TARİH | SEMBOL | YÖN | GİRİŞ | STOP | TP | DURUM | NOT
+#
+#  YÖN   : BUY veya SELL
+#  TP    : Birden fazla hedef için  4046 / 4060  yazın
+#  DURUM : AKTİF, BEKLEMEDE, TP, STOP veya KAPANDI
+#          (İşlem sonuçlanınca sadece bu kelimeyi değiştirin)
+#  NOT   : İsteğe bağlı kısa açıklama
+#
+#  "#" ile başlayan satırlar sitede GÖRÜNMEZ.
+#  En alta yazılan işlem sitede EN ÜSTTE görünür.
+#
+#  ÖRNEK (yayınlamak için baştaki # işaretini silin):
+# 13.11.2026 09:30 | XAUUSD | BUY | 4020 | 4000 | 4046 | AKTİF | Londra seansı
+# ============================================================
+
+13.11.2026 11:40 | XAUUSD | SELL | 3895 | 3979 | 3846 | AKTİF | Londra seansı
