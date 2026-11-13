@@ -1,11 +1,11 @@
-﻿# ============================================================
+# ============================================================
 #  JOY FX · VIP İŞLEM ÖNERİLERİ
 # ============================================================
 #  Her satır = 1 işlem. Alanları | işaretiyle ayırın:
 #
 #  TARİH | SEMBOL | YÖN | GİRİŞ | STOP | TP | DURUM | NOT
 #
-#  YÖN   : BUY veya SELL
+#  YÖN   : BUY, SELL veya DUYURU (yön henüz açıklanmadıysa)
 #  TP    : Birden fazla hedef için  4046 / 4060  yazın
 #  DURUM : AKTİF, BEKLEMEDE, TP, STOP veya KAPANDI
 #          (İşlem sonuçlanınca sadece bu kelimeyi değiştirin)
@@ -20,3 +20,4 @@
 
 13.11.2026 11:40 | XAUUSD | SELL | 3895 | 3979 | 3846 | AKTİF | Londra seansı
 13.11.2026 15:40 | NVDA | BUY | Talep üzerine | — | — | AKTİF | VIP DUYURU: NVDA (ABD hissesi) toplu giriş. Bu işlem yalnızca özel yatırımcılarımıza özeldir; detaylar ve seviyeler için uzmanınızdan talep edin.
+13.11.2026 16:25 | NG.J | DUYURU | Bu akşam 20:00 | — | — | BEKLEMEDE | ⏰ VIP İŞLEM DUYURUSU — NG.J işlemi bu akşam saat 20:00'de açıklanıyor. Yön, giriş ve hedef seviyeleri yalnızca özel yatırımcılarımızla paylaşılacak. Yerinizi şimdiden ayırtmak için uzmanınızdan talep edin.
