@@ -407,7 +407,7 @@ body.locked #gate{display:flex}
       <div class="sec-head"><h2 class="gold">Ürünler & Strateji Kartları</h2><div class="muted">Her enstrümanın özellikleri ve ekibimizin analiz yaklaşımı.</div></div>
       <div class="card glow" id="deskCard" style="margin-bottom:20px">
         <div class="prod-head" style="flex-wrap:wrap;gap:10px;margin-bottom:12px">
-          <div><h3 style="margin:0">🔍 Analiz Masası</h3><div class="muted small">Soldaki araç çubuğuyla trend çizgisi, Fibonacci, destek/direnç ve formasyon çizebilir, 100+ indikatör ekleyebilirsiniz. Çizimler sayfa yenilenince silinir.</div></div>
+          <div><h3 style="margin:0">🔍 Analiz Masası</h3><div class="muted small">Aşağıdaki hazır butonlarla tek tıkla analiz yapın. İsterseniz soldaki araç çubuğuyla kendiniz de çizim yapabilirsiniz.</div></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <select id="deskSym" style="width:190px"></select>
             <select id="deskTf" style="width:120px">
@@ -415,38 +415,41 @@ body.locked #gate{display:flex}
             </select>
           </div>
         </div>
+        <div class="muted small" style="margin-bottom:6px">Tek tuşla indikatör ekleyin:</div>
+        <div class="btnrow" id="presetBtns" style="margin-bottom:8px"></div>
+        <div class="sig-note" id="presetInfo" style="margin-bottom:12px"></div>
         <div class="chartbox" id="deskChart" style="height:620px"></div>
       </div>
 
       <h3 style="margin-bottom:4px">🧮 Analiz Araçları</h3>
-      <div class="muted small" style="margin-bottom:12px">Seviyeleri kendiniz hesaplayın. Değerleri MT5 veya grafikten alın.</div>
+      <div class="muted small" style="margin-bottom:12px">Kutular örnek altın (XAUUSD) değerleriyle dolu gelir, sonuçları hemen görürsünüz. Kendi rakamlarınızı MT5'ten veya yukarıdaki grafikten alıp yazın. Günün hazır pivotları için yukarıdaki <b>🎯 Pivot Seviyeleri</b> butonunu kullanın.</div>
       <div class="grid g3" style="margin-bottom:24px">
         <div class="card">
           <h3>Pivot Noktaları</h3>
-          <div class="muted small">Önceki günün yüksek, düşük ve kapanış fiyatından günlük destek/direnç seviyeleri.</div>
+          <div class="muted small">Dünün en yüksek, en düşük ve kapanış fiyatını yazın; bugünün destek (yeşil) ve direnç (kırmızı) seviyeleri çıkar.</div>
           <div class="grid g3" style="gap:8px">
-            <div><label>Yüksek</label><input id="pvH" type="number" step="any"></div>
-            <div><label>Düşük</label><input id="pvL" type="number" step="any"></div>
-            <div><label>Kapanış</label><input id="pvC" type="number" step="any"></div>
+            <div><label>Yüksek</label><input id="pvH" type="number" step="any" value="3880"></div>
+            <div><label>Düşük</label><input id="pvL" type="number" step="any" value="3840"></div>
+            <div><label>Kapanış</label><input id="pvC" type="number" step="any" value="3858"></div>
           </div>
           <div class="result" id="pvOut"></div>
         </div>
         <div class="card">
           <h3>Fibonacci Seviyeleri</h3>
-          <div class="muted small">Bir hareketin tepe ve dip fiyatından geri çekilme ve hedef seviyeleri.</div>
+          <div class="muted small">Son hareketin tepe ve dip fiyatını yazın; fiyatın geri dönebileceği seviyeler ve hedefler çıkar. En önemlileri altın renkli %50 ve %61,8'dir.</div>
           <div class="grid g3" style="gap:8px">
-            <div><label>Tepe</label><input id="fbH" type="number" step="any"></div>
-            <div><label>Dip</label><input id="fbL" type="number" step="any"></div>
+            <div><label>Tepe</label><input id="fbH" type="number" step="any" value="3920"></div>
+            <div><label>Dip</label><input id="fbL" type="number" step="any" value="3840"></div>
             <div><label>Trend</label><select id="fbD"><option value="up">Yükseliş</option><option value="down">Düşüş</option></select></div>
           </div>
           <div class="result" id="fbOut"></div>
         </div>
         <div class="card">
           <h3>ATR ile Stop & Hedef</h3>
-          <div class="muted small">Piyasa oynaklığına (ATR) göre stop mesafesi ve 1:2 risk/ödül hedefi.</div>
+          <div class="muted small">Giriş fiyatını ve ATR değerini (MT5'te ATR göstergesinden) yazın; uygun stop ve hedef çıkar. Altın için ATR genelde 15-40 arasıdır.</div>
           <div class="grid g2" style="gap:8px">
-            <div><label>Giriş fiyatı</label><input id="atE" type="number" step="any"></div>
-            <div><label>ATR değeri</label><input id="atA" type="number" step="any"></div>
+            <div><label>Giriş fiyatı</label><input id="atE" type="number" step="any" value="3858"></div>
+            <div><label>ATR değeri</label><input id="atA" type="number" step="any" value="25"></div>
             <div><label>Çarpan</label><input id="atM" type="number" step="0.1" value="1.5"></div>
             <div><label>Yön</label><select id="atD"><option value="buy">Alış (Buy)</option><option value="sell">Satış (Sell)</option></select></div>
           </div>
@@ -916,13 +919,32 @@ function initProd(){
     s.value = v; drawDesk(); $("#deskCard").scrollIntoView({behavior:"smooth", block:"start"});
   });
 }
+const PRESETS = [
+  {id:"pivot", ad:"🎯 Pivot Seviyeleri", st:["PivotPointsStandard@tv-basicstudies"],
+   bilgi:"<b>Pivot Seviyeleri:</b> Günün destek (S1-S3) ve direnç (R1-R3) seviyelerini grafikte otomatik çizer. Fiyat pivotun üstündeyse görünüm olumlu, altındaysa zayıf kabul edilir."},
+  {id:"trend", ad:"📈 Trend", st:["MASimple@tv-basicstudies","MAExp@tv-basicstudies"],
+   bilgi:"<b>Trend (Hareketli Ortalamalar):</b> Fiyat çizgilerin üstündeyse yükseliş, altındaysa düşüş trendi vardır. Çizgilerin kesişmesi trend değişimine işaret edebilir."},
+  {id:"rsi", ad:"⚡ RSI", st:["RSI@tv-basicstudies"],
+   bilgi:"<b>RSI:</b> Alttaki göstergede 70 üstü <b>aşırı alım</b> (düşüş gelebilir), 30 altı <b>aşırı satım</b> (yükseliş gelebilir) bölgesidir."},
+  {id:"bb", ad:"🌊 Bollinger", st:["BB@tv-basicstudies"],
+   bilgi:"<b>Bollinger Bantları:</b> Fiyat üst banda değince pahalı, alt banda değince ucuz bölgededir. Bantlar daralınca sert bir hareket yaklaşıyor olabilir."},
+  {id:"macd", ad:"📊 MACD", st:["MACD@tv-basicstudies"],
+   bilgi:"<b>MACD:</b> Mavi çizgi turuncuyu yukarı keserse alış, aşağı keserse satış sinyali olarak yorumlanır. Sütunlar büyüdükçe hareket güçlenir."},
+  {id:"temiz", ad:"🧹 Temiz Grafik", st:[], bilgi:"<b>Temiz grafik:</b> Tüm göstergeler kaldırıldı. Soldaki araçlarla kendi çiziminizi yapabilirsiniz."}
+];
+let deskPreset = "pivot";
 function drawDesk(){
+  const pr = PRESETS.find(p => p.id === deskPreset) || PRESETS[0];
+  $("#presetInfo").innerHTML = pr.bilgi;
+  document.querySelectorAll("[data-preset]").forEach(b => b.classList.toggle("on", b.dataset.preset === deskPreset));
   tvWidget("deskChart","advanced-chart",{autosize:true, symbol:$("#deskSym").value, interval:$("#deskTf").value, timezone:"Europe/Istanbul",
-    theme:"dark", style:"1", allow_symbol_change:true, hide_side_toolbar:false, hide_top_toolbar:false, withdateranges:true,
+    theme:"dark", style:"1", allow_symbol_change:true, hide_side_toolbar:false, hide_top_toolbar:false, withdateranges:true, studies:pr.st,
     details:true, calendar:false, backgroundColor:"rgba(16,16,21,1)", gridColor:"rgba(255,255,255,0.04)", support_host:"https://www.tradingview.com"});
 }
 function initDesk(){
   $("#deskSym").innerHTML = CONFIG.semboller.map(s => `<option value="${esc(s.tv)}">${esc(s.ad)}</option>`).join("");
+  $("#presetBtns").innerHTML = PRESETS.map(p => `<button class="btn" data-preset="${p.id}">${p.ad}</button>`).join("");
+  document.querySelectorAll("[data-preset]").forEach(b => b.onclick = () => { deskPreset = b.dataset.preset; drawDesk(); });
   $("#deskSym").onchange = drawDesk; $("#deskTf").onchange = drawDesk; drawDesk();
 }
 function decOf(...vals){ return Math.min(5, Math.max(2, ...vals.map(v => { const s = String(v); return s.includes(".") ? s.split(".")[1].length : 0; }))); }
@@ -930,16 +952,18 @@ function lvRow(label, val, d, cls){ return `<div class="sess" style="padding:5px
 function initCalcs(){
   const pv = () => { const H=+$("#pvH").value, L=+$("#pvL").value, C=+$("#pvC").value;
     if (!$("#pvH").value || !$("#pvL").value || !$("#pvC").value){ $("#pvOut").innerHTML = '<span class="muted small">Üç değeri girin.</span>'; return; }
+    if (H<=0 || L<=0 || C<=0 || H<L || C>H || C<L){ $("#pvOut").innerHTML = '<span class="down small">Değerleri kontrol edin: Yüksek ≥ Kapanış ≥ Düşük olmalı ve hepsi pozitif olmalı.</span>'; return; }
     const d = decOf($("#pvH").value,$("#pvL").value,$("#pvC").value), P=(H+L+C)/3;
     $("#pvOut").innerHTML = lvRow("R3",H+2*(P-L),d,"down")+lvRow("R2",P+(H-L),d,"down")+lvRow("R1",2*P-L,d,"down")+lvRow("Pivot",P,d,"gold")+lvRow("S1",2*P-H,d,"up")+lvRow("S2",P-(H-L),d,"up")+lvRow("S3",L-2*(H-P),d,"up"); };
   const fb = () => { const H=+$("#fbH").value, L=+$("#fbL").value, up=$("#fbD").value==="up";
-    if (!$("#fbH").value || !$("#fbL").value || H<=L){ $("#fbOut").innerHTML = '<span class="muted small">Tepe, dipten büyük olmalı.</span>'; return; }
+    if (!$("#fbH").value || !$("#fbL").value || H<=L || L<=0){ $("#fbOut").innerHTML = '<span class="muted small">Tepe, dipten büyük olmalı.</span>'; return; }
     const d = decOf($("#fbH").value,$("#fbL").value), R=H-L;
     const ret = [0,23.6,38.2,50,61.8,78.6,100].map(r => lvRow("%"+String(r).replace(".",","), up ? H-R*r/100 : L+R*r/100, d, r===61.8||r===50?"gold":""));
     const ext = [127.2,161.8].map(e => lvRow("Hedef %"+String(e).replace(".",","), up ? L+R*e/100 : H-R*e/100, d, up?"up":"down"));
     $("#fbOut").innerHTML = '<div class="muted small">Geri çekilme</div>'+ret.join("")+'<div class="muted small" style="margin-top:6px">Uzatma hedefleri</div>'+ext.join(""); };
   const at = () => { const E=+$("#atE").value, A=+$("#atA").value, M=+$("#atM").value||1.5, buy=$("#atD").value==="buy";
     if (!$("#atE").value || !$("#atA").value){ $("#atOut").innerHTML = '<span class="muted small">Giriş ve ATR değerini girin.</span>'; return; }
+    if (E<=0 || A<=0){ $("#atOut").innerHTML = '<span class="down small">Giriş ve ATR pozitif olmalı.</span>'; return; }
     const d = decOf($("#atE").value,$("#atA").value), dist=A*M;
     $("#atOut").innerHTML = lvRow("Stop", buy?E-dist:E+dist, d, "down")+lvRow("Hedef 1:1", buy?E+dist:E-dist, d)+lvRow("Hedef 1:2", buy?E+2*dist:E-2*dist, d, "up")+
       `<div class="muted small" style="margin-top:6px">Stop mesafesi: ${dist.toFixed(d)}</div>`; };
