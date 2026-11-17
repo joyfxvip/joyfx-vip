@@ -405,6 +405,56 @@ body.locked #gate{display:flex}
     <!-- ============ ÜRÜNLER ============ -->
     <section id="s-prod">
       <div class="sec-head"><h2 class="gold">Ürünler & Strateji Kartları</h2><div class="muted">Her enstrümanın özellikleri ve ekibimizin analiz yaklaşımı.</div></div>
+      <div class="card glow" id="deskCard" style="margin-bottom:20px">
+        <div class="prod-head" style="flex-wrap:wrap;gap:10px;margin-bottom:12px">
+          <div><h3 style="margin:0">🔍 Analiz Masası</h3><div class="muted small">Soldaki araç çubuğuyla trend çizgisi, Fibonacci, destek/direnç ve formasyon çizebilir, 100+ indikatör ekleyebilirsiniz. Çizimler sayfa yenilenince silinir.</div></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="deskSym" style="width:190px"></select>
+            <select id="deskTf" style="width:120px">
+              <option value="15">15 dk</option><option value="60" selected>1 saat</option><option value="240">4 saat</option><option value="D">Günlük</option><option value="W">Haftalık</option>
+            </select>
+          </div>
+        </div>
+        <div class="chartbox" id="deskChart" style="height:620px"></div>
+      </div>
+
+      <h3 style="margin-bottom:4px">🧮 Analiz Araçları</h3>
+      <div class="muted small" style="margin-bottom:12px">Seviyeleri kendiniz hesaplayın. Değerleri MT5 veya grafikten alın.</div>
+      <div class="grid g3" style="margin-bottom:24px">
+        <div class="card">
+          <h3>Pivot Noktaları</h3>
+          <div class="muted small">Önceki günün yüksek, düşük ve kapanış fiyatından günlük destek/direnç seviyeleri.</div>
+          <div class="grid g3" style="gap:8px">
+            <div><label>Yüksek</label><input id="pvH" type="number" step="any"></div>
+            <div><label>Düşük</label><input id="pvL" type="number" step="any"></div>
+            <div><label>Kapanış</label><input id="pvC" type="number" step="any"></div>
+          </div>
+          <div class="result" id="pvOut"></div>
+        </div>
+        <div class="card">
+          <h3>Fibonacci Seviyeleri</h3>
+          <div class="muted small">Bir hareketin tepe ve dip fiyatından geri çekilme ve hedef seviyeleri.</div>
+          <div class="grid g3" style="gap:8px">
+            <div><label>Tepe</label><input id="fbH" type="number" step="any"></div>
+            <div><label>Dip</label><input id="fbL" type="number" step="any"></div>
+            <div><label>Trend</label><select id="fbD"><option value="up">Yükseliş</option><option value="down">Düşüş</option></select></div>
+          </div>
+          <div class="result" id="fbOut"></div>
+        </div>
+        <div class="card">
+          <h3>ATR ile Stop & Hedef</h3>
+          <div class="muted small">Piyasa oynaklığına (ATR) göre stop mesafesi ve 1:2 risk/ödül hedefi.</div>
+          <div class="grid g2" style="gap:8px">
+            <div><label>Giriş fiyatı</label><input id="atE" type="number" step="any"></div>
+            <div><label>ATR değeri</label><input id="atA" type="number" step="any"></div>
+            <div><label>Çarpan</label><input id="atM" type="number" step="0.1" value="1.5"></div>
+            <div><label>Yön</label><select id="atD"><option value="buy">Alış (Buy)</option><option value="sell">Satış (Sell)</option></select></div>
+          </div>
+          <div class="result" id="atOut"></div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom:12px">💎 Ürün Kartları</h3>
       <div class="grid g3" id="prodCards"></div>
     </section>
 
@@ -667,6 +717,8 @@ const CONFIG = {
   ],
 
   // Ürün kartları (yaklaşım metinleri eğitim amaçlıdır)
+  stratejiTarihi: "17.11.2026",   // Ürün kartlarındaki strateji notlarının güncellenme tarihi
+
   urunler: [
     { kod:"XAUUSD", ad:"Altın / ABD Doları", tv:"OANDA:XAUUSD", kontrat:"100 ons", pip:"0.10", seans:"Londra + New York", yaklasim:"Güvenli liman talebi, ABD verileri ve dolar endeksiyle birlikte izlenir. Yüksek volatilite nedeniyle sıkı risk yönetimi gerektirir." },
     { kod:"EURUSD", ad:"Euro / ABD Doları", tv:"FX:EURUSD", kontrat:"100.000 EUR", pip:"0.0001", seans:"Londra – New York kesişimi", yaklasim:"ECB ve Fed faiz beklentileri ana belirleyicidir. Likiditesi en yüksek parite; trend takibine uygundur." },
@@ -847,8 +899,8 @@ function initProd(){
         <tr><td>Pip</td><td>${esc(u.pip)}</td></tr>
         <tr><td>En aktif seans</td><td>${esc(u.seans)}</td></tr>
       </table>
-      <div style="margin-top:12px"><span class="chip g">Analiz yaklaşımı</span><div class="muted small" style="margin-top:6px">${esc(u.yaklasim)}</div></div>
-      <div style="margin-top:14px"><button class="btn" data-open="${esc(u.tv)}">Grafikte aç →</button></div>
+      <div style="margin-top:12px"><span class="chip g">Analiz yaklaşımı</span><span class="muted small" style="margin-left:6px">📅 ${esc(CONFIG.stratejiTarihi||"")}</span><div class="muted small" style="margin-top:6px">${esc(u.yaklasim)}</div></div>
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" data-desk="${esc(u.tv)}">🔍 Analiz et</button><button class="btn" data-open="${esc(u.tv)}">Grafik modları →</button></div>
     </div>`).join("");
   CONFIG.urunler.forEach((u,i) => tvWidget("mini"+i,"mini-symbol-overview",{symbol:u.tv,width:"100%",height:"100%",dateRange:"1M",autosize:true}));
   document.querySelectorAll("[data-open]").forEach(b => b.onclick = () => {
@@ -857,6 +909,44 @@ function initProd(){
     if (![...sel.options].some(o => o.value === b.dataset.open)) sel.insertAdjacentHTML("beforeend", `<option value="${b.dataset.open}">${b.dataset.open}</option>`);
     sel.value = b.dataset.open; drawChart();
   });
+  initDesk(); initCalcs();
+  document.querySelectorAll("[data-desk]").forEach(b => b.onclick = () => {
+    const s = $("#deskSym"), v = b.dataset.desk;
+    if (![...s.options].some(o => o.value === v)) s.insertAdjacentHTML("beforeend", `<option value="${esc(v)}">${esc(v)}</option>`);
+    s.value = v; drawDesk(); $("#deskCard").scrollIntoView({behavior:"smooth", block:"start"});
+  });
+}
+function drawDesk(){
+  tvWidget("deskChart","advanced-chart",{autosize:true, symbol:$("#deskSym").value, interval:$("#deskTf").value, timezone:"Europe/Istanbul",
+    theme:"dark", style:"1", allow_symbol_change:true, hide_side_toolbar:false, hide_top_toolbar:false, withdateranges:true,
+    details:true, calendar:false, backgroundColor:"rgba(16,16,21,1)", gridColor:"rgba(255,255,255,0.04)", support_host:"https://www.tradingview.com"});
+}
+function initDesk(){
+  $("#deskSym").innerHTML = CONFIG.semboller.map(s => `<option value="${esc(s.tv)}">${esc(s.ad)}</option>`).join("");
+  $("#deskSym").onchange = drawDesk; $("#deskTf").onchange = drawDesk; drawDesk();
+}
+function decOf(...vals){ return Math.min(5, Math.max(2, ...vals.map(v => { const s = String(v); return s.includes(".") ? s.split(".")[1].length : 0; }))); }
+function lvRow(label, val, d, cls){ return `<div class="sess" style="padding:5px 0"><span class="${cls||""}">${label}</span><b class="${cls||""}">${isFinite(val)?val.toFixed(d):"—"}</b></div>`; }
+function initCalcs(){
+  const pv = () => { const H=+$("#pvH").value, L=+$("#pvL").value, C=+$("#pvC").value;
+    if (!$("#pvH").value || !$("#pvL").value || !$("#pvC").value){ $("#pvOut").innerHTML = '<span class="muted small">Üç değeri girin.</span>'; return; }
+    const d = decOf($("#pvH").value,$("#pvL").value,$("#pvC").value), P=(H+L+C)/3;
+    $("#pvOut").innerHTML = lvRow("R3",H+2*(P-L),d,"down")+lvRow("R2",P+(H-L),d,"down")+lvRow("R1",2*P-L,d,"down")+lvRow("Pivot",P,d,"gold")+lvRow("S1",2*P-H,d,"up")+lvRow("S2",P-(H-L),d,"up")+lvRow("S3",L-2*(H-P),d,"up"); };
+  const fb = () => { const H=+$("#fbH").value, L=+$("#fbL").value, up=$("#fbD").value==="up";
+    if (!$("#fbH").value || !$("#fbL").value || H<=L){ $("#fbOut").innerHTML = '<span class="muted small">Tepe, dipten büyük olmalı.</span>'; return; }
+    const d = decOf($("#fbH").value,$("#fbL").value), R=H-L;
+    const ret = [0,23.6,38.2,50,61.8,78.6,100].map(r => lvRow("%"+String(r).replace(".",","), up ? H-R*r/100 : L+R*r/100, d, r===61.8||r===50?"gold":""));
+    const ext = [127.2,161.8].map(e => lvRow("Hedef %"+String(e).replace(".",","), up ? L+R*e/100 : H-R*e/100, d, up?"up":"down"));
+    $("#fbOut").innerHTML = '<div class="muted small">Geri çekilme</div>'+ret.join("")+'<div class="muted small" style="margin-top:6px">Uzatma hedefleri</div>'+ext.join(""); };
+  const at = () => { const E=+$("#atE").value, A=+$("#atA").value, M=+$("#atM").value||1.5, buy=$("#atD").value==="buy";
+    if (!$("#atE").value || !$("#atA").value){ $("#atOut").innerHTML = '<span class="muted small">Giriş ve ATR değerini girin.</span>'; return; }
+    const d = decOf($("#atE").value,$("#atA").value), dist=A*M;
+    $("#atOut").innerHTML = lvRow("Stop", buy?E-dist:E+dist, d, "down")+lvRow("Hedef 1:1", buy?E+dist:E-dist, d)+lvRow("Hedef 1:2", buy?E+2*dist:E-2*dist, d, "up")+
+      `<div class="muted small" style="margin-top:6px">Stop mesafesi: ${dist.toFixed(d)}</div>`; };
+  ["#pvH","#pvL","#pvC"].forEach(s => $(s).oninput = pv);
+  ["#fbH","#fbL","#fbD"].forEach(s => $(s).oninput = $(s).onchange = fb);
+  ["#atE","#atA","#atM","#atD"].forEach(s => $(s).oninput = $(s).onchange = at);
+  pv(); fb(); at();
 }
 
 /* Robot */
