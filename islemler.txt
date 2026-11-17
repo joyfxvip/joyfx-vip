@@ -18,6 +18,7 @@
 # 13.11.2026 09:30 | XAUUSD | BUY | 4020 | 4000 | 4046 | AKTİF | Londra seansı
 # ============================================================
 
-13.11.2026 11:40 | XAUUSD | SELL | 3895 | 3979 | 3846 | AKTİF | Londra seansı
-13.11.2026 15:40 | NVDA | DUYURU | Talep üzerine | — | — | AKTİF | VIP DUYURU: NVDA (ABD hissesi) toplu giriş. Bu işlem yalnızca özel yatırımcılarımıza özeldir; detaylar ve seviyeler için uzmanınızdan talep edin.
-13.11.2026 16:25 | NG.J | DUYURU | Bu akşam 20:00 | — | — | BEKLEMEDE | ⏰ VIP İŞLEM DUYURUSU — NG.J işlemi bu akşam saat 20:00'de açıklanıyor. Yön, giriş ve hedef seviyeleri yalnızca özel yatırımcılarımızla paylaşılacak. Yerinizi şimdiden ayırtmak için uzmanınızdan talep edin.
+13.11.2026 11:40 | XAUUSD | SELL | 3895 | 3979 | 3846 | TP | Londra seansı
+13.11.2026 15:40 | NVDA | DUYURU | Talep üzerine | — | — | TP | VIP DUYURU: NVDA (ABD hissesi) toplu giriş. Bu işlem yalnızca özel yatırımcılarımıza özeldir; detaylar ve seviyeler için uzmanınızdan talep edin.
+13.11.2026 16:25 | NG.J | DUYURU | Talep üzerine | — | — | TP | VIP İŞLEM: NG.J işlemi hedefe ulaştı. Özel yatırımcılarımıza tebrikler!
+17.11.2026 13:20 | NASDAQ | BUY | Anlık fiyat | — | 27550 | AKTİF | 🚀 VIP İŞLEM: Nasdaq 100 anlık fiyattan alış, hedef 27550. Stop ve pozisyon büyüklüğü için uzmanınızla görüşün.
