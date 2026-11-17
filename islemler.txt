@@ -22,3 +22,4 @@
 13.11.2026 15:40 | NVDA | DUYURU | Talep üzerine | — | — | TP | VIP DUYURU: NVDA (ABD hissesi) toplu giriş. Bu işlem yalnızca özel yatırımcılarımıza özeldir; detaylar ve seviyeler için uzmanınızdan talep edin.
 13.11.2026 16:25 | NG.J | DUYURU | Talep üzerine | — | — | TP | VIP İŞLEM: NG.J işlemi hedefe ulaştı. Özel yatırımcılarımıza tebrikler!
 17.11.2026 13:20 | NASDAQ | BUY | Anlık fiyat | — | 27550 | AKTİF | 🚀 VIP İŞLEM: Nasdaq 100 anlık fiyattan alış, hedef 27550. Stop ve pozisyon büyüklüğü için uzmanınızla görüşün.
+17.11.2026 13:42 | XAGUSD | SELL | Anlık fiyat | — | 46,91 | AKTİF | 🥈 VIP SWING İŞLEM: Gümüş satış, hedef 46,91. Swing işlemdir. Uzmanınızla iletişime geçin.
