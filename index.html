@@ -1203,6 +1203,7 @@ function renderCountdown(){
   const boxes = ["#cdHome","#cdIslem"].map(s => $(s)).filter(Boolean);
   if (!CD){ boxes.forEach(b => b.innerHTML = ""); return; }
   const ms = CD.t - Date.now(), done = ms <= 0;
+  if (ms < -2*36e5){ boxes.forEach(b => { b.innerHTML = ""; b.dataset.done = "gone"; }); return; }   // açıklamadan 2 saat sonra kendiliğinden kalkar
   const wins = SIGS.filter(s => s.stKey==="tp").slice(0,4);
   const winsHtml = wins.length ? `<span>Son başarılarımız:</span>` + wins.map(s => `<span class="cd-win ${/🏆/.test(s.note)?"star":""}">${/🏆/.test(s.note)?"🏆":"✓"} ${esc(s.sym)} ${DIRW[s.dir]==="DUYURU"?"":DIRW[s.dir]} · TP</span>`).join("") : "";
   const sec = Math.max(0, Math.floor(ms/1000)), H = Math.floor(sec/3600), M = Math.floor(sec%3600/60), S = sec%60;
@@ -1213,7 +1214,7 @@ function renderCountdown(){
         <span class="cd-tag">${done?"⚡ YAYINDA":"🔥 YENİ · GERİ SAYIM"}</span>
         <h3>${done?"Yeni VIP işlem açıklandı!":esc(CD.baslik)}</h3>
         <p>${done?"İşlem detayları için hemen uzmanınızla iletişime geçin.":esc(CD.metin||"Yön ve seviyeler yalnızca VIP yatırımcılarımızla paylaşılacak. Yerinizi uzmanınızdan ayırtın.")}</p>
-        <div style="margin-top:14px"><a class="btn pri" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" yeni VIP işlem için yerimi ayırtmak istiyorum.")}">💬 Yerimi ayırt</a></div>
+        <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">${done?`<a class="btn pri" href="#islem" onclick="show('islem');return false;">📈 VIP İşlemleri gör</a><a class="btn" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" yeni açıklanan VIP işlem hakkında bilgi almak istiyorum.")}">💬 Uzmanıma sor</a>`:`<a class="btn pri" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" yeni VIP işlem için yerimi ayırtmak istiyorum.")}">💬 Yerimi ayırt</a>`}</div>
       </div>
       <div class="cd-clock">
         <div class="cd-u"><b data-u="h">${pad(H)}</b><span>SAAT</span></div>
