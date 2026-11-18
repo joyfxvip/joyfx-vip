@@ -115,6 +115,7 @@ body.locked .app,body.locked .contact-fab,body.locked #intro{display:none!import
 #gate{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;
   background:radial-gradient(ellipse at 50% 0%,rgba(212,175,55,.13) 0%,transparent 55%),radial-gradient(circle at 50% 120%,#1a1610 0%,#08080b 60%)}
 body.locked #gate{display:flex}
+#gate{overflow-y:auto} #gate>.gate-box{margin:auto}
 #gate:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.04) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 70%);-webkit-mask-image:radial-gradient(circle at 50% 45%,#000 0%,transparent 70%)}
 .gate-box{position:relative;width:100%;max-width:410px;text-align:center;padding:44px 36px 30px;border-radius:20px;
   background:linear-gradient(180deg,rgba(24,22,18,.92),rgba(12,12,15,.95));border:1px solid rgba(212,175,55,.35);
@@ -144,11 +145,26 @@ body.locked #gate{display:flex}
 .gate-sub{font-size:10.5px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin:18px 0 8px;display:flex;align-items:center;gap:10px}
 .gate-sub:before,.gate-sub:after{content:"";flex:1;height:1px;background:rgba(212,175,55,.25)}
 .gate-in{text-align:left;padding:12px 14px;border-radius:12px;border-color:#3a3220;background:#0b0b0e;margin-bottom:8px;font-size:14px}
+.mcard{position:relative;overflow:hidden;margin-bottom:18px;padding:22px 24px;border-radius:18px;border:1px solid rgba(212,175,55,.45);background:linear-gradient(135deg,#17130a 0%,#0d0d10 55%,#1a1608 100%);display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.mcard:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,226,140,.13) 48%,transparent 66%);transform:translateX(-100%);animation:mshine 6s ease-in-out infinite}
+@keyframes mshine{0%,60%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.mcard .mav{width:58px;height:58px;border-radius:50%;background:var(--grad);color:#1a1405;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex:none;box-shadow:0 0 0 3px rgba(212,175,55,.2)}
+.mcard .mi{flex:1;min-width:180px}
+.mcard .mi small{display:block;font-size:10.5px;letter-spacing:2.5px;color:var(--gold2);text-transform:uppercase;margin-bottom:4px}
+.mcard .mi b{font-size:21px;font-weight:600;display:block}
+.mcard .mi span{color:var(--mut);font-size:13px}
+.mcard .mt{display:flex;gap:10px;flex-wrap:wrap}
+.mcard .mt div{border:1px solid var(--line);border-radius:12px;padding:8px 14px;background:rgba(0,0,0,.25);font-size:12px;color:var(--mut)}
+.mcard .mt div b{display:block;color:var(--txt,#fff);font-size:15px;font-weight:600;letter-spacing:.5px;margin-top:2px}
+.mcard .medit{all:unset;cursor:pointer;color:var(--mut);font-size:13px;position:absolute;top:10px;right:14px} .mcard .medit:hover{color:var(--gold2)}
 .uz-chip{display:flex;align-items:center;gap:8px;padding:5px 6px 5px 12px;border:1px solid var(--line);border-radius:30px;font-size:13px;background:var(--bg2)}
 .uz-chip b{color:var(--gold2);font-weight:500}
 .uz-chip a,.uz-chip button{all:unset;cursor:pointer;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
 .uz-chip a{background:var(--grad);color:#1a1405}
 .uz-chip button{color:var(--mut)} .uz-chip button:hover{color:var(--gold2)}
+#yatModal{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+#yatModal.on{display:flex}
+#yatModal .gate-box{padding:34px 30px 26px}
 #uzModal{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
 #uzModal.on{display:flex}
 #uzModal .gate-box{padding:34px 30px 26px}
@@ -273,10 +289,15 @@ body.locked #gate{display:flex}
     <div class="t1 gold">JOY FX</div>
     <div class="t2">PRIVATE CLIENT LOUNGE</div>
     <div class="gate-line"></div>
-    <p>Bu alan yalnızca davetli VIP yatırımcılarımıza özeldir.<br>Lütfen size iletilen erişim kodunu girin.</p>
+    <p>Bu alan yalnızca davetli VIP yatırımcılarımıza özeldir.<br>Lütfen size iletilen erişim kodunu ve bilgilerinizi girin.</p>
     <div class="pw">
       <input id="gatePw" type="password" placeholder="VIP ERİŞİM KODU" autocomplete="current-password">
       <button type="button" class="eye" id="gateEye" title="Göster/Gizle">👁</button>
+    </div>
+    <div id="gateYatWrap">
+      <div class="gate-sub">Yatırımcı Bilgileriniz</div>
+      <input class="gate-in" id="gateYatAd" placeholder="Adınız soyadınız" autocomplete="off">
+      <input class="gate-in" id="gateYatLogin" inputmode="numeric" placeholder="MT5 hesap numaranız (login)" autocomplete="off">
     </div>
     <div id="gateUzWrap">
       <div class="gate-sub">Kişisel Uzmanınız</div>
@@ -290,6 +311,19 @@ body.locked #gate{display:flex}
       <a id="gateHelp" target="_blank" rel="noopener">Kodum yok</a>
     </div>
     <div class="gate-foot"><span class="lock">🔒</span> Kişiye özel güvenli erişim · Joy FX</div>
+  </form>
+</div>
+
+<!-- Yatırımcı bilgileri -->
+<div id="yatModal">
+  <form class="gate-box" id="yatForm" style="max-width:380px">
+    <div class="t2" style="margin:0 0 6px">YATIRIMCI BİLGİLERİNİZ</div>
+    <p style="margin-bottom:14px">VIP üyelik kartınız ve uzmanınıza giden mesajlar bu bilgilerle hazırlanır.</p>
+    <input class="gate-in" id="yatAd" placeholder="Adınız soyadınız">
+    <input class="gate-in" id="yatLogin" inputmode="numeric" placeholder="MT5 hesap numaranız (login)">
+    <div class="gate-err" id="yatErr"></div>
+    <button type="submit" class="gate-btn" style="margin-top:4px">Kaydet ve devam et</button>
+    <button type="button" class="logout" id="yatCancel" style="margin-top:12px;display:none">Vazgeç</button>
   </form>
 </div>
 
@@ -343,6 +377,7 @@ body.locked #gate{display:flex}
 
     <!-- ============ ANA SAYFA ============ -->
     <section id="s-home">
+      <div class="mcard" id="memberCard" style="display:none"></div>
       <div id="cdHome"></div>
       <div class="card glow announce" style="margin-bottom:18px">
         <div class="ico">📣</div>
@@ -1251,7 +1286,7 @@ async function greet(){
     if (r.ok){
       const j = await r.json();
       const nm = j.name || (j.email ? j.email.split("@")[0] : "");
-      if (nm) $("#greet").textContent = nm.charAt(0).toUpperCase() + nm.slice(1);
+      if (nm && !yatNow()) $("#greet").textContent = nm.charAt(0).toUpperCase() + nm.slice(1);
     }
   } catch(e){}
 }
@@ -1266,6 +1301,8 @@ function boot(){
   renderTrial();
   $("#disclaimer").textContent = "⚠ Risk Uyarısı: " + CONFIG.uyari;
   renderUz();
+  renderYat();
+  if (!yatNow()) setTimeout(() => openYat(false), 2100);
   buildNav();
   tvWidget("ticker","ticker-tape",{symbols:CONFIG.semboller.map(s=>({proName:s.tv,title:s.ad})),showSymbolLogo:true,displayMode:"adaptive"});
   greet(); tickClock(); setInterval(tickClock, 30000);
@@ -1287,10 +1324,56 @@ function normTel(t){
 function getUz(){ try{ const u = JSON.parse(localStorage.getItem(UZKEY)||"null"); return u && u.ad && u.tel ? u : null; }catch(e){ return null; } }
 function setUz(ad, tel){ try{ localStorage.setItem(UZKEY, JSON.stringify({ad, tel})); }catch(e){} window._uz = {ad, tel}; }
 function uzNow(){ return getUz() || window._uz || null; }
+/* ---- Yatırımcı bilgileri (yalnızca bu cihazda saklanır) ---- */
+const YATKEY = "joyfx_vip_yatirimci";
+function getYat(){ try{ const y = JSON.parse(localStorage.getItem(YATKEY)||"null"); return y && y.ad && y.login ? y : null; }catch(e){ return null; } }
+function setYat(ad, login){
+  const old = getYat() || window._yat; const since = (old && old.since) || Date.now();
+  const y = {ad, login, since}; try{ localStorage.setItem(YATKEY, JSON.stringify(y)); }catch(e){} window._yat = y;
+}
+function yatNow(){ return getYat() || window._yat || null; }
+function checkYat(ad, login){
+  ad = String(ad||"").trim().replace(/\s+/g," "); const l = String(login||"").replace(/\D/g,"");
+  if (ad.length < 3 || !/\s/.test(ad)) return [null,"Lütfen adınızı ve soyadınızı yazın."];
+  if (l.length < 4 || l.length > 12) return [null,"Lütfen MT5 hesap numaranızı (login) doğru yazın."];
+  return [{ad, login:l}, ""];
+}
+function waText(text){
+  const y = yatNow(); if (!y) return text;
+  return `Merhaba, ben ${y.ad} (MT5: ${y.login}). ` + String(text).replace(/^Merhaba,\s*/i,"");
+}
 function waLink(text){
   const u = uzNow(); const num = u ? u.tel : CONFIG.iletisim.whatsapp;
-  return `https://wa.me/${num}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${num}?text=${encodeURIComponent(waText(text))}`;
 }
+function renderYat(){
+  const y = yatNow(), u = uzNow();
+  if (!y){ $("#memberCard").style.display = "none"; return; }
+  const ini = y.ad.split(" ").filter(Boolean).map(w=>w[0]).slice(0,2).join("").toLocaleUpperCase("tr-TR");
+  const since = new Date(y.since||Date.now()).toLocaleDateString("tr-TR",{day:"2-digit",month:"long",year:"numeric"});
+  const tier = window._session && window._session.trial ? "Deneme Üye" : "VIP Üye";
+  $("#greet").textContent = y.ad;
+  $("#tierBadge").textContent = `◆ ${tier} · MT5 ${y.login}`;
+  const mc = $("#memberCard"); mc.style.display = "";
+  mc.innerHTML = `<button class="medit" id="yatEdit" title="Bilgilerimi düzenle">✎ Düzenle</button>
+    <div class="mav">${esc(ini)}</div>
+    <div class="mi"><small>${esc(CONFIG.marka)} · Private Client</small><b>${esc(y.ad)}</b><span>Özel VIP yatırımcımız · üyelik: ${esc(since)}</span></div>
+    <div class="mt"><div>MT5 Hesap No<b>${esc(y.login)}</b></div><div>Üyelik<b class="gold">◆ ${tier}</b></div>${u?`<div>Uzmanınız<b>${esc(u.ad)}</b></div>`:""}</div>`;
+  $("#yatEdit").onclick = () => openYat(true);
+}
+function openYat(canCancel){
+  const y = yatNow();
+  $("#yatAd").value = y ? y.ad : ""; $("#yatLogin").value = y ? y.login : ""; $("#yatErr").textContent = "";
+  $("#yatCancel").style.display = canCancel ? "" : "none";
+  $("#yatModal").classList.add("on"); setTimeout(()=>$("#yatAd").focus(),100);
+}
+$("#yatCancel").onclick = () => $("#yatModal").classList.remove("on");
+$("#yatForm").onsubmit = e => {
+  e.preventDefault();
+  const [y, err] = checkYat($("#yatAd").value, $("#yatLogin").value);
+  if (!y){ $("#yatErr").textContent = err; return; }
+  setYat(y.ad, y.login); $("#yatModal").classList.remove("on"); renderUz(); renderYat();
+};
 function checkUz(ad, tel){
   ad = ad.trim(); const t = normTel(tel);
   if (ad.length < 2) return [null,"Lütfen uzmanınızın adını yazın."];
@@ -1385,7 +1468,7 @@ function trialWindow(hs){
 function renderTrial(){
   const s = window._session;
   if (!s || !s.trial) return;
-  $("#tierBadge").textContent = "◆ Deneme Üye";
+  $("#tierBadge").textContent = "◆ Deneme Üye" + (yatNow() ? " · MT5 " + yatNow().login : "");
   const tick = () => {
     const ms = s.exp - Date.now();
     if (ms <= 0){ try{localStorage.removeItem(KEY);}catch(e){} location.reload(); return; }
@@ -1406,7 +1489,7 @@ function initGate(){
   if (/[?&]kodolustur/.test(location.search)){
     document.querySelector("#gateForm p").innerHTML = "<b class='gold'>Kod oluşturucu</b><br>Yeni erişim kodunu yazıp butona basın. Çıkan metni <code>erisimKodlari</code> listesine ekleyin.";
     document.querySelector(".gate-btn").textContent = "Şifrelenmiş hâlini üret";
-    $("#gateUzWrap").style.display = "none";
+    $("#gateUzWrap").style.display = "none"; $("#gateYatWrap").style.display = "none";
     $("#gateForm").onsubmit = async e => { e.preventDefault();
       const v = norm($("#gatePw").value); if(!v) return;
       $("#gateErr").style.color = "var(--gold2)";
@@ -1416,6 +1499,7 @@ function initGate(){
   }
 
   if (savedOk()) { boot(); return; }
+  const py = getYat(); if (py){ $("#gateYatAd").value = py.ad; $("#gateYatLogin").value = py.login; }
   const pre = getUz(); if (pre){ $("#gateUzAd").value = pre.ad; $("#gateUzTel").value = pre.tel; }
   setTimeout(() => $("#gatePw").focus(), 300);
   $("#gateForm").onsubmit = async e => {
@@ -1424,16 +1508,18 @@ function initGate(){
     const box = $("#gateForm");
     $("#gateErr").style.color = "";
     if (!v){ $("#gateErr").textContent = "Lütfen erişim kodunuzu girin."; return; }
+    const [yt, ytErr] = checkYat($("#gateYatAd").value, $("#gateYatLogin").value);
+    if (!yt){ $("#gateErr").textContent = ytErr; box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake"); return; }
     const [uz, uzErr] = checkUz($("#gateUzAd").value, $("#gateUzTel").value);
     if (!uz){ $("#gateErr").textContent = uzErr; box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake"); return; }
     const hs = await sha256(v);
     if (CONFIG.deneme.kodlar.includes(hs)){
       const t = trialWindow(hs);
       if (!t.ok){
-        $("#gateErr").innerHTML = t.msg + ` <a href="${waLinkTo(uz.tel, CONFIG.marka+" VIP tam erişim almak istiyorum.")}" target="_blank" rel="noopener">Uzmanınıza yazın →</a>`;
+        $("#gateErr").innerHTML = t.msg + ` <a href="${waLinkTo(uz.tel, `Merhaba, ben ${yt.ad} (MT5: ${yt.login}). ${CONFIG.marka} VIP tam erişim almak istiyorum.`)}" target="_blank" rel="noopener">Uzmanınıza yazın →</a>`;
         box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake"); return;
       }
-      setUz(uz.ad, uz.tel);
+      setUz(uz.ad, uz.tel); setYat(yt.ad, yt.login);
       const rec = {h:hs, exp:t.end, trial:true};
       try{ localStorage.setItem(KEY, JSON.stringify(rec)); }catch(e){}
       window._session = rec;
@@ -1441,7 +1527,7 @@ function initGate(){
       setTimeout(boot, 450); return;
     }
     if (CONFIG.erisimKodlari.includes(hs)){
-      setUz(uz.ad, uz.tel);
+      setUz(uz.ad, uz.tel); setYat(yt.ad, yt.login);
       const days = $("#gateRemember").checked ? CONFIG.hatirlaGun : 0;
       const rec = JSON.stringify({h:hs, exp: Date.now() + (days ? days*864e5 : 12*36e5)});
       try{ (days ? localStorage : sessionStorage).setItem(KEY, rec); }catch(e){}
