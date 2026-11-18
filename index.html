@@ -76,6 +76,29 @@ section.on{display:block}
 select,input{background:#0e0e13;border:1px solid var(--line);color:var(--txt);padding:9px 12px;border-radius:9px;font:inherit;width:100%}
 select:focus,input:focus{outline:none;border-color:var(--gold)}
 label{font-size:12px;color:var(--mut);display:block;margin:10px 0 5px;letter-spacing:.5px}
+/* COBRA — Çekim Talebi */
+.ct-wrap{max-width:640px}
+.ct-card{position:relative;overflow:hidden;border-color:rgba(212,175,55,.4)!important}
+.ct-lock{text-align:center;padding:34px 24px}
+.ct-lock .big{font-size:44px;margin-bottom:8px}
+.ct-steps{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.ct-steps span{font-size:11.5px;letter-spacing:1px;padding:5px 12px;border-radius:20px;border:1px solid var(--line);color:var(--mut)}
+.ct-steps span.on{border-color:var(--gold);color:var(--gold2);background:rgba(212,175,55,.08)}
+.ct-amt{position:relative} .ct-amt input{font-size:22px;padding:14px 64px 14px 14px;font-weight:600}
+.ct-amt b{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--gold2);font-size:14px;letter-spacing:1px}
+.ct-chk{display:flex;gap:10px;align-items:flex-start;margin:14px 0;font-size:13px;color:var(--mut);cursor:pointer;line-height:1.5}
+.ct-chk input{width:auto;margin-top:3px}
+.ct-err{color:var(--down,#f87171);font-size:13px;min-height:18px;margin-top:8px}
+.ct-ok{text-align:center;padding:10px 4px}
+.ct-ok .big{font-size:46px;animation:ctpop .5s ease}
+@keyframes ctpop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.ct-warn{margin-top:14px;padding:10px 14px;border-radius:10px;background:rgba(234,179,8,.08);border:1px dashed rgba(234,179,8,.45);font-size:13px;color:#fde68a}
+.ct-hist{margin-top:18px}
+.ct-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line);font-size:13.5px;flex-wrap:wrap}
+.ct-row:last-child{border:none}
+.ct-row .no{font-family:monospace;color:var(--gold2);font-size:12.5px}
+.ct-row .amt{font-weight:600;margin-left:auto}
+.ct-note{font-size:12px;color:var(--mut);margin-top:12px;line-height:1.55}
 .chartbox{height:560px;border-radius:12px;overflow:hidden;border:1px solid var(--line)}
 .mtf .chartbox{height:340px}
 .sess{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14px}
@@ -616,6 +639,12 @@ body.locked #gate{display:flex}
       </div>
     </section>
 
+    <!-- ============ ÇEKİM TALEBİ (COBRA) ============ -->
+    <section id="s-cekim">
+      <div class="sec-head"><h2 class="gold">Çekim Talebi</h2><div class="muted">Çekim talebinizi buradan kişisel uzmanınıza iletebilirsiniz.</div></div>
+      <div class="ct-wrap" id="ctBox"></div>
+    </section>
+
     <div class="disclaimer" id="disclaimer"></div>
   </main>
 </div>
@@ -832,7 +861,7 @@ const CONFIG = {
 const SECTIONS = [
   ["home","🏛","Ana Sayfa"],["islem","🎯","VIP İşlemler"],["chart","📈","Grafik Modları"],["news","🌍","Haber & Takvim"],
   ["algo","⚙️","Algoritmalarımız"],["prod","💎","Ürünler & Stratejiler"],["robot","🤖","VIP Robot"],
-  ["pkg","👑","VIP Paketler"],["tools","🧮","Araçlar"]
+  ["pkg","👑","VIP Paketler"],["tools","🧮","Araçlar"],["cekim","💸","Çekim Talebi"]
 ];
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -859,14 +888,16 @@ const loaded = {};
 function show(id){
   document.querySelectorAll("section").forEach(s => s.classList.toggle("on", s.id === "s-"+id));
   document.querySelectorAll("[data-sec]").forEach(b => b.classList.toggle("on", b.dataset.sec === id));
+  if (id === "cekim") ctOpen();   // her girişte yeniden doğrulama
   if (!loaded[id] && LOADERS[id]) { LOADERS[id](); loaded[id] = true; }
   try { history.replaceState(null, "", "#"+id); } catch(e){}
   window.scrollTo({top:0, behavior:"smooth"});
 }
 function buildNav(){
-  const html = SECTIONS.map(([id,ic,t]) => `<button data-sec="${id}"><span class="ic">${ic}</span>${t}${id==="islem"?'<span class="nav-badge" id="sigBadge" style="display:none"></span>':""}</button>`).join("");
+  const lk = id => id==="cekim" && window._session && window._session.trial ? " 🔒" : "";
+  const html = SECTIONS.map(([id,ic,t]) => `<button data-sec="${id}"><span class="ic">${ic}</span>${t}${lk(id)}${id==="islem"?'<span class="nav-badge" id="sigBadge" style="display:none"></span>':""}</button>`).join("");
   $("#nav").innerHTML = html;
-  $("#mobnav").innerHTML = SECTIONS.map(([id,ic,t]) => `<button data-sec="${id}">${ic} ${t}</button>`).join("");
+  $("#mobnav").innerHTML = SECTIONS.map(([id,ic,t]) => `<button data-sec="${id}">${ic} ${t}${lk(id)}</button>`).join("");
   document.querySelectorAll("[data-sec]").forEach(b => b.onclick = () => show(b.dataset.sec));
 }
 
@@ -1313,6 +1344,93 @@ function boot(){
   setTimeout(() => $("#intro").classList.add("hide"), 1900);
 }
 
+/* ---- COBRA: Çekim Talebi ---- */
+const CTKEY = "joyfx_vip_cekim", CT_MIN = 100;
+function ctList(){ try{ return JSON.parse(localStorage.getItem(CTKEY)||"[]"); }catch(e){ return []; } }
+function ctSave(l){ try{ localStorage.setItem(CTKEY, JSON.stringify(l.slice(0,50))); }catch(e){} }
+const ctFmt = n => Number(n).toLocaleString("tr-TR",{maximumFractionDigits:2});
+const ctDate = t => new Date(t).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+function ctMsg(r){
+  return `${CONFIG.marka} VIP panelinden ${ctFmt(r.amt)} USD çekim talebi oluşturdum. Talep no: ${r.no}.` + (r.note ? ` Not: ${r.note}` : "") + " Resmi çekim süreci için dönüşünüzü bekliyorum.";
+}
+function ctHist(){
+  const l = ctList();
+  if (!l.length) return "";
+  return `<div class="card ct-hist"><h3 style="margin-bottom:6px">Talep Geçmişim</h3>
+    ${l.map((r,i) => `<div class="ct-row"><span class="no">${esc(r.no)}</span><span class="muted">${esc(ctDate(r.t))}</span><span class="amt">${esc(ctFmt(r.amt))} USD</span>
+      <a class="btn" target="_blank" rel="noopener" href="${waLink(ctMsg(r))}" title="Mesajı uzmanınıza yeniden gönderin">📤 Tekrar gönder</a></div>`).join("")}
+    <div class="ct-note">Bu liste yalnızca bu cihazda saklanır.</div></div>`;
+}
+function ctOpen(){
+  const box = $("#ctBox"); if (!box) return;
+  const s = window._session;
+  if (s && s.trial){
+    box.innerHTML = `<div class="card ct-card ct-lock"><div class="big">🔒</div><h3>Tam VIP üyelerimize özel</h3>
+      <p class="muted" style="margin:8px 0 18px">Çekim Talebi bölümü deneme erişiminde kullanılamaz. Tam VIP erişim için uzmanınızla iletişime geçin.</p>
+      <a class="btn pri" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" VIP tam erişim almak istiyorum.")}">💬 Tam VIP erişim al</a></div>`;
+    return;
+  }
+  box.innerHTML = `<div class="card ct-card">
+      <div class="ct-steps"><span class="on">1 · Doğrulama</span><span>2 · Talep</span><span>3 · İletim</span></div>
+      <h3>Kimlik doğrulama</h3>
+      <p class="muted" style="margin:6px 0 4px">Güvenliğiniz için bu bölüme her girişte VIP erişim kodunuzu ve MT5 hesap numaranızı onaylayın.</p>
+      <form id="ctAuth" autocomplete="off">
+        <label>VIP erişim kodunuz</label><input id="ctCode" type="password" placeholder="VIP ERİŞİM KODU" autocomplete="off">
+        <label>MT5 hesap numaranız (login)</label><input id="ctLogin" inputmode="numeric" placeholder="Örn. 5512345" autocomplete="off">
+        <div class="ct-err" id="ctErr"></div>
+        <button class="btn pri" type="submit" style="margin-top:6px">🔐 Onayla ve devam et</button>
+      </form></div>` + ctHist();
+  setTimeout(() => { const c = $("#ctCode"); if (c) c.focus(); }, 200);
+  $("#ctAuth").onsubmit = async e => {
+    e.preventDefault();
+    const code = norm($("#ctCode").value), login = $("#ctLogin").value.replace(/\D/g,""), y = yatNow();
+    if (!code || !login){ $("#ctErr").textContent = "Lütfen erişim kodunuzu ve MT5 hesap numaranızı girin."; return; }
+    const hs = await sha256(code);
+    const ok = s && hs === s.h && CONFIG.erisimKodlari.includes(hs) && y && login === y.login;
+    if (!ok){ $("#ctErr").textContent = "Bilgiler doğrulanamadı. Erişim kodunuzu ve MT5 hesap numaranızı kontrol edin."; $("#ctCode").select(); return; }
+    ctForm();
+  };
+}
+function ctForm(){
+  const y = yatNow(), u = uzNow();
+  $("#ctBox").innerHTML = `<div class="card ct-card">
+      <div class="ct-steps"><span>1 · Doğrulama ✓</span><span class="on">2 · Talep</span><span>3 · İletim</span></div>
+      <h3>Çekim talebi oluştur</h3>
+      <p class="muted" style="margin:6px 0 2px">${esc(y.ad)} · MT5 ${esc(y.login)}${u?` · Uzmanınız: ${esc(u.ad)}`:""}</p>
+      <form id="ctReq" autocomplete="off" novalidate>
+        <label>Çekmek istediğiniz tutar</label>
+        <div class="ct-amt"><input id="ctAmt" type="number" inputmode="decimal" min="${CT_MIN}" step="any" placeholder="Örn. 5000"><b>USD</b></div>
+        <div class="muted small" style="margin-top:6px">En az ${CT_MIN} USD</div>
+        <label>Not (isteğe bağlı)</label><input id="ctNote" maxlength="160" placeholder="Uzmanınıza iletmek istediğiniz kısa not">
+        <label class="ct-chk"><input type="checkbox" id="ctChk"> Bunun bir çekim talebi olduğunu, işlemin resmi çekim sürecinden sonra tamamlanacağını biliyorum.</label>
+        <div class="ct-err" id="ctErr"></div>
+        <button class="btn pri" type="submit">💬 Talebi uzmanıma gönder</button>
+      </form></div>` + ctHist();
+  setTimeout(() => $("#ctAmt").focus(), 150);
+  $("#ctReq").onsubmit = e => {
+    e.preventDefault();
+    const amt = parseFloat(String($("#ctAmt").value).replace(",", "."));
+    if (!uzNow()){ $("#ctErr").textContent = "Önce kişisel uzmanınızı tanımlayın (üst bölümdeki ✎ simgesi)."; return; }
+    if (!(amt >= CT_MIN)){ $("#ctErr").textContent = `Çekim tutarı en az ${CT_MIN} USD olmalıdır.`; return; }
+    if (!$("#ctChk").checked){ $("#ctErr").textContent = "Lütfen bilgilendirme kutusunu onaylayın."; return; }
+    const d = new Date(), pad = n => String(n).padStart(2,"0");
+    const r = {no:`CT-${pad(d.getDate())}${pad(d.getMonth()+1)}-${Math.floor(1000+Math.random()*9000)}`, t:Date.now(), amt:Math.round(amt*100)/100, note:$("#ctNote").value.trim().slice(0,160)};
+    const l = ctList(); l.unshift(r); ctSave(l);
+    window.open(waLink(ctMsg(r)), "_blank", "noopener");
+    ctDone(r);
+  };
+}
+function ctDone(r){
+  $("#ctBox").innerHTML = `<div class="card ct-card"><div class="ct-steps"><span>1 · Doğrulama ✓</span><span>2 · Talep ✓</span><span class="on">3 · İletim</span></div>
+      <div class="ct-ok"><div class="big">✅</div><h3>Talebiniz uzmanınıza iletildi</h3>
+      <p class="muted" style="margin:8px 0 4px">İşlem resmi çekim sürecinden sonra tamamlanır.</p>
+      <p style="margin:10px 0"><span class="muted">Talep no:</span> <b class="gold">${esc(r.no)}</b> · <b>${esc(ctFmt(r.amt))} USD</b></p></div>
+      <div class="ct-warn">⚠️ WhatsApp açıldıysa <b>Gönder</b>'e basmayı unutmayın. Açılmadıysa aşağıdaki butonla tekrar gönderin.</div>
+      <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn pri" target="_blank" rel="noopener" href="${waLink(ctMsg(r))}">📤 WhatsApp'ta tekrar gönder</a><button class="btn" id="ctNew">Yeni talep</button></div>
+    </div>` + ctHist();
+  $("#ctNew").onclick = ctForm;
+}
+
 /* ---- Kişisel uzman ---- */
 const UZKEY = "joyfx_vip_uzman";
 function normTel(t){
@@ -1531,6 +1649,7 @@ function initGate(){
       setUz(uz.ad, uz.tel); setYat(yt.ad, yt.login);
       const days = $("#gateRemember").checked ? CONFIG.hatirlaGun : 0;
       const rec = JSON.stringify({h:hs, exp: Date.now() + (days ? days*864e5 : 12*36e5)});
+      window._session = JSON.parse(rec);
       try{ (days ? localStorage : sessionStorage).setItem(KEY, rec); }catch(e){}
       $("#gateErr").style.color = "var(--up)"; $("#gateErr").textContent = "✓ Erişim onaylandı";
       setTimeout(boot, 450);
