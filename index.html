@@ -1194,7 +1194,7 @@ function parseSigs(text){
     const tps = tpRaw.map(numTR);
     const [stKey, stLbl] = normStatus(durum);
     return { i, tarih: tarih||"", sym: (sembol||"").toUpperCase().replace(/\s/g,""), dir,
-             entry: numTR(giris), sl: numTR(stop), tps, raw:{e:(giris||"").trim(), s:(stop||"").trim(), t:tpRaw}, stKey, stLbl, note: not.join(sep==="|"?" | ":", ").trim() };
+             entry: numTR(giris), sl: numTR(stop), tps, raw:{e:(giris||"").trim(), s:(stop||"").trim(), t:tpRaw, tt:(tp||"").trim()}, stKey, stLbl, note: not.join(sep==="|"?" | ":", ").trim() };
   }).filter(s => s.sym).reverse();
 }
 function pipSize(sym, price){
@@ -1212,7 +1212,7 @@ const fmtN = v => isNaN(v) ? "—" : String(v);
 const DIRL = {buy:"▲ BUY", sell:"▼ SELL", info:"📣 DUYURU"}, DIRW = {buy:"BUY", sell:"SELL", info:"DUYURU"};
 function sigCard(s){
   const ps = pipSize(s.sym, s.entry), risk = Math.abs(s.entry - s.sl);
-  const tpHtml = s.tps.length ? s.tps.map((t,k)=>`<div class="lv tp"><div class="k">TP${s.tps.length>1?k+1:""}</div><div class="n">${esc(s.raw.t[k])}</div><div class="d">${isNaN(s.entry)?"":Math.round(Math.abs(t-s.entry)/ps)+" pip"}${risk?` · 1:${(Math.abs(t-s.entry)/risk).toFixed(1)}`:""}</div></div>`).join("") : `<div class="lv tp"><div class="k">TP</div><div class="n">—</div></div>`;
+  const tpHtml = s.tps.length ? s.tps.map((t,k)=>`<div class="lv tp"><div class="k">TP${s.tps.length>1?k+1:""}</div><div class="n">${esc(s.raw.t[k])}</div><div class="d">${isNaN(s.entry)?"":Math.round(Math.abs(t-s.entry)/ps)+" pip"}${risk?` · 1:${(Math.abs(t-s.entry)/risk).toFixed(1)}`:""}</div></div>`).join("") : `<div class="lv tp"><div class="k">TP</div><div class="n">${esc(s.raw.tt||"—")}</div></div>`;
   const closed = ["stop","kapali"].includes(s.stKey), won = s.stKey==="tp", star = won && /🏆/.test(s.note);
   const txt = `${CONFIG.marka} VIP İşlem\n${s.sym} ${DIRW[s.dir]}\nGiriş: ${s.raw.e||"—"}\nStop: ${s.raw.s||"—"}\nTP: ${s.raw.t.join(" / ")||"—"}`;
   return `<div class="sig-card ${s.dir} ${closed?"closed":""} ${won?"won":""} ${star?"star":""}">${won?`<div class="won-rb">${star?"🏆 HARİKA KAZANÇ":"✅ HEDEFE ULAŞTI"}</div>`:""}
