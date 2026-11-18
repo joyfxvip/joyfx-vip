@@ -223,6 +223,33 @@ body.locked #gate{display:flex}
 .empty{text-align:center;padding:50px 20px;color:var(--mut)}
 .home-sig{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
 @media (max-width:820px){.lv .n{font-size:15px}}
+/* ---------- Geri Sayım (yeni) ---------- */
+.cd{position:relative;border-radius:18px;padding:2px;margin-bottom:20px;overflow:hidden;isolation:isolate}
+.cd:before{content:"";position:absolute;inset:-60%;z-index:-2;background:conic-gradient(from 0deg,#7c3aed,#06b6d4,#ec4899,#7c3aed);animation:spin 6s linear infinite}
+.cd-in{position:relative;border-radius:16px;padding:24px 26px;background:radial-gradient(circle at 15% 0%,rgba(124,58,237,.35),transparent 55%),radial-gradient(circle at 90% 100%,rgba(6,182,212,.28),transparent 55%),#0c0a18;display:grid;grid-template-columns:1.2fr auto;gap:22px;align-items:center}
+.cd-tag{display:inline-flex;align-items:center;gap:8px;padding:5px 12px;border-radius:30px;font-size:11px;letter-spacing:2px;font-weight:700;color:#fff;background:linear-gradient(90deg,#ec4899,#7c3aed);box-shadow:0 0 20px rgba(236,72,153,.5);animation:cdpulse 1.6s ease-in-out infinite}
+@keyframes cdpulse{50%{box-shadow:0 0 34px rgba(236,72,153,.9);transform:scale(1.03)}}
+.cd h3{font-family:Inter,sans-serif;font-weight:800;font-size:24px;margin:12px 0 6px;background:linear-gradient(90deg,#fff,#a5f3fc,#f0abfc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cd p{color:#c4b5fd;font-size:14px;margin:0}
+.cd-clock{display:flex;gap:10px}
+.cd-u{min-width:78px;text-align:center;padding:12px 8px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(165,243,252,.25);box-shadow:inset 0 0 20px rgba(124,58,237,.25)}
+.cd-u b{display:block;font-size:38px;line-height:1;font-weight:800;font-variant-numeric:tabular-nums;color:#a5f3fc;text-shadow:0 0 14px rgba(6,182,212,.8)}
+.cd-u b.tick{animation:tick .45s ease}
+@keyframes tick{0%{transform:translateY(-8px) scale(1.15);opacity:.4;color:#f0abfc}100%{transform:none;opacity:1}}
+.cd-u span{display:block;margin-top:6px;font-size:10.5px;letter-spacing:2px;color:#c4b5fd}
+.cd-bar{grid-column:1/-1;height:6px;border-radius:6px;background:rgba(255,255,255,.07);overflow:hidden}
+.cd-bar i{display:block;height:100%;background:linear-gradient(90deg,#06b6d4,#7c3aed,#ec4899);background-size:200% 100%;animation:barflow 2s linear infinite;transition:width 1s linear;box-shadow:0 0 12px rgba(236,72,153,.7)}
+@keyframes barflow{to{background-position:-200% 0}}
+.cd-wins{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:12.5px;color:#c4b5fd}
+.cd-win{padding:5px 12px;border-radius:20px;background:rgba(63,191,127,.12);border:1px solid rgba(63,191,127,.45);color:#86efac;font-weight:600}
+.cd-win.star{background:linear-gradient(90deg,rgba(212,175,55,.25),rgba(63,191,127,.18));border-color:#f3d77a;color:#fde68a;animation:cdpulse 2s infinite}
+.cd.done .cd-u b{color:#86efac;text-shadow:0 0 14px rgba(63,191,127,.9)}
+.sig-card.won{opacity:1;box-shadow:inset 3px 0 0 var(--up),0 0 0 1px rgba(63,191,127,.25)}
+.sig-card.star{border-color:#f3d77a;box-shadow:inset 3px 0 0 var(--gold),0 0 40px rgba(212,175,55,.25);animation:starglow 2.4s ease-in-out infinite}
+@keyframes starglow{50%{box-shadow:inset 3px 0 0 var(--gold),0 0 60px rgba(212,175,55,.45)}}
+.won-rb{margin:-22px -22px 16px;padding:8px 14px;text-align:center;background:linear-gradient(90deg,#16a34a,#3fbf7f);color:#fff;font-size:11px;font-weight:800;letter-spacing:2px}
+.sig-card.star .won-rb{background:var(--grad);color:#1a1405}
+@media (max-width:820px){.cd-in{grid-template-columns:1fr;padding:18px}.cd-u{min-width:0;flex:1}.cd-u b{font-size:28px}.cd h3{font-size:20px}}
 .mob-nav{display:none}
 @media (max-width:1100px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:820px){
@@ -316,6 +343,7 @@ body.locked #gate{display:flex}
 
     <!-- ============ ANA SAYFA ============ -->
     <section id="s-home">
+      <div id="cdHome"></div>
       <div class="card glow announce" style="margin-bottom:18px">
         <div class="ico">📣</div>
         <div><h3 id="annTitle"></h3><div class="muted" id="annText"></div></div>
@@ -337,6 +365,7 @@ body.locked #gate{display:flex}
     <!-- ============ GRAFİK ============ -->
     <!-- ============ VIP İŞLEMLER ============ -->
     <section id="s-islem">
+      <div id="cdIslem"></div>
       <div class="sig-top">
         <div><h2 class="gold">VIP İşlem Önerileri</h2><div class="muted small" id="sigUpd">Yükleniyor…</div></div>
         <div class="btnrow" style="margin:0" id="sigFilters">
@@ -1071,8 +1100,18 @@ function normStatus(s){
   if (/KAPA|İPTAL|IPTAL|CLOSE/.test(s)) return ["kapali","KAPANDI"];
   return ["aktif","AKTİF"];
 }
+let CD = null, cdTimer = null, sigFirst = true;
+function parseCountdown(lines){
+  const l = lines.find(x => /^SAYA[ÇC]\s*\|/i.test(x)); if (!l) return null;
+  const f = l.split("|").map(x=>x.trim());
+  const m = (f[1]||"").match(/(\d{1,2})\.(\d{1,2})\.(\d{4})\s+(\d{1,2})[:.](\d{2})/); if (!m) return null;
+  const t = Date.UTC(+m[3], +m[2]-1, +m[1], +m[4]-3, +m[5]);   // İstanbul saati (UTC+3)
+  return { t, baslik: f[2] || "Yeni VIP işlem geliyor", metin: f.slice(3).join(" | ") };
+}
 function parseSigs(text){
-  const lines = text.replace(/\r/g,"").split("\n").map(l=>l.trim()).filter(l=>l && !l.startsWith("#"));
+  const all = text.replace(/\r/g,"").split("\n").map(l=>l.trim()).filter(l=>l && !l.startsWith("#"));
+  CD = parseCountdown(all);
+  const lines = all.filter(l => !/^SAYA[ÇC]\s*\|/i.test(l));
   if (!lines.length) return [];
   const sep = lines[0].includes("|") ? "|" : (lines[0].split(";").length > lines[0].split(",").length ? ";" : ",");
   const rows = lines.map(l => splitRow(l, sep)).filter(r => r.length >= 5);
@@ -1103,9 +1142,9 @@ const DIRL = {buy:"▲ BUY", sell:"▼ SELL", info:"📣 DUYURU"}, DIRW = {buy:"
 function sigCard(s){
   const ps = pipSize(s.sym, s.entry), risk = Math.abs(s.entry - s.sl);
   const tpHtml = s.tps.length ? s.tps.map((t,k)=>`<div class="lv tp"><div class="k">TP${s.tps.length>1?k+1:""}</div><div class="n">${esc(s.raw.t[k])}</div><div class="d">${isNaN(s.entry)?"":Math.round(Math.abs(t-s.entry)/ps)+" pip"}${risk?` · 1:${(Math.abs(t-s.entry)/risk).toFixed(1)}`:""}</div></div>`).join("") : `<div class="lv tp"><div class="k">TP</div><div class="n">—</div></div>`;
-  const closed = ["tp","stop","kapali"].includes(s.stKey);
+  const closed = ["stop","kapali"].includes(s.stKey), won = s.stKey==="tp", star = won && /🏆/.test(s.note);
   const txt = `${CONFIG.marka} VIP İşlem\n${s.sym} ${DIRW[s.dir]}\nGiriş: ${s.raw.e||"—"}\nStop: ${s.raw.s||"—"}\nTP: ${s.raw.t.join(" / ")||"—"}`;
-  return `<div class="sig-card ${s.dir} ${closed?"closed":""}">
+  return `<div class="sig-card ${s.dir} ${closed?"closed":""} ${won?"won":""} ${star?"star":""}">${won?`<div class="won-rb">${star?"🏆 HARİKA KAZANÇ":"✅ HEDEFE ULAŞTI"}</div>`:""}
     <div class="sig-h">
       <div><div class="sig-sym">${esc(s.sym)}</div><div class="muted small">${esc(s.tarih)}</div></div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
@@ -1125,8 +1164,43 @@ function sigCard(s){
     </div>
   </div>`;
 }
+function renderCountdown(){
+  const boxes = ["#cdHome","#cdIslem"].map(s => $(s)).filter(Boolean);
+  if (!CD){ boxes.forEach(b => b.innerHTML = ""); return; }
+  const ms = CD.t - Date.now(), done = ms <= 0;
+  const wins = SIGS.filter(s => s.stKey==="tp").slice(0,4);
+  const winsHtml = wins.length ? `<span>Son başarılarımız:</span>` + wins.map(s => `<span class="cd-win ${/🏆/.test(s.note)?"star":""}">${/🏆/.test(s.note)?"🏆":"✓"} ${esc(s.sym)} ${DIRW[s.dir]==="DUYURU"?"":DIRW[s.dir]} · TP</span>`).join("") : "";
+  const sec = Math.max(0, Math.floor(ms/1000)), H = Math.floor(sec/3600), M = Math.floor(sec%3600/60), S = sec%60;
+  const pct = done ? 100 : Math.max(2, Math.min(100, 100 - ms/(4*36e5)*100));
+  const pad = n => String(n).padStart(2,"0");
+  const html = `<div class="cd ${done?"done":""}"><div class="cd-in">
+      <div>
+        <span class="cd-tag">${done?"⚡ YAYINDA":"🔥 YENİ · GERİ SAYIM"}</span>
+        <h3>${done?"Yeni VIP işlem açıklandı!":esc(CD.baslik)}</h3>
+        <p>${done?"İşlem detayları için hemen uzmanınızla iletişime geçin.":esc(CD.metin||"Yön ve seviyeler yalnızca VIP yatırımcılarımızla paylaşılacak. Yerinizi uzmanınızdan ayırtın.")}</p>
+        <div style="margin-top:14px"><a class="btn pri" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" yeni VIP işlem için yerimi ayırtmak istiyorum.")}">💬 Yerimi ayırt</a></div>
+      </div>
+      <div class="cd-clock">
+        <div class="cd-u"><b data-u="h">${pad(H)}</b><span>SAAT</span></div>
+        <div class="cd-u"><b data-u="m">${pad(M)}</b><span>DAKİKA</span></div>
+        <div class="cd-u"><b data-u="s">${pad(S)}</b><span>SANİYE</span></div>
+      </div>
+      <div class="cd-bar"><i style="width:${pct}%"></i></div>
+      ${winsHtml?`<div class="cd-wins">${winsHtml}</div>`:""}
+    </div></div>`;
+  boxes.forEach(b => {
+    const old = b.querySelector('[data-u="s"]');
+    if (!old || b.dataset.done !== String(done)){ b.innerHTML = html; b.dataset.done = String(done); return; }
+    const vals = {h:pad(H), m:pad(M), s:pad(S)};
+    b.querySelectorAll("[data-u]").forEach(el => { const v = vals[el.dataset.u]; if (el.textContent !== v){ el.textContent = v; el.classList.remove("tick"); void el.offsetWidth; el.classList.add("tick"); } });
+    const bar = b.querySelector(".cd-bar i"); if (bar) bar.style.width = pct + "%";
+  });
+}
 function renderSigs(){
   const act = SIGS.filter(s => ["aktif","bekle"].includes(s.stKey));
+  if (sigFirst && SIGS.length){ sigFirst = false; if (!act.length){ sigFilter = "kapali"; document.querySelectorAll("[data-f]").forEach(x => x.classList.toggle("on", x.dataset.f==="kapali")); } }
+  ["#cdHome","#cdIslem"].forEach(s => { const b=$(s); if (b) b.dataset.done = ""; });
+  renderCountdown(); if (!cdTimer) cdTimer = setInterval(renderCountdown, 1000);
   const list = sigFilter==="aktif" ? act : sigFilter==="kapali" ? SIGS.filter(s=>!["aktif","bekle"].includes(s.stKey)) : SIGS;
   $("#sigList").innerHTML = list.length ? list.map(sigCard).join("") :
     `<div class="card empty" style="grid-column:1/-1"><div style="font-size:34px">🎯</div><h3 style="margin:8px 0 4px">${sigFilter==="aktif"?"Şu an aktif işlem önerisi yok":"Henüz kayıt yok"}</h3><div>Yeni öneriler paylaşıldığında burada görünür. Sayfa otomatik yenilenir.</div></div>`;
