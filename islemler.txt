@@ -11,6 +11,9 @@
 #          (İşlem sonuçlanınca sadece bu kelimeyi değiştirin)
 #  NOT   : İsteğe bağlı kısa açıklama
 #
+#  GERİ SAYIM: SAYAÇ | GG.AA.YYYY SS:DD (İstanbul saati) | Başlık | Açıklama
+#  Sayacı kapatmak için SAYAÇ satırının başına # koyun.
+#
 #  "#" ile başlayan satırlar sitede GÖRÜNMEZ.
 #  En alta yazılan işlem sitede EN ÜSTTE görünür.
 #
@@ -21,5 +24,6 @@
 13.11.2026 11:40 | XAUUSD | SELL | 3895 | 3979 | 3846 | TP | Londra seansı
 13.11.2026 15:40 | NVDA | DUYURU | Talep üzerine | — | — | TP | VIP DUYURU: NVDA (ABD hissesi) toplu giriş. Bu işlem yalnızca özel yatırımcılarımıza özeldir; detaylar ve seviyeler için uzmanınızdan talep edin.
 13.11.2026 16:25 | NG.J | DUYURU | Talep üzerine | — | — | TP | VIP İŞLEM: NG.J işlemi hedefe ulaştı. Özel yatırımcılarımıza tebrikler!
-17.11.2026 13:20 | NASDAQ | BUY | Anlık fiyat | — | 27550 | AKTİF | 🚀 VIP İŞLEM: Nasdaq 100 anlık fiyattan alış, hedef 27550. Stop ve pozisyon büyüklüğü için uzmanınızla görüşün.
-17.11.2026 13:42 | XAGUSD | SELL | Anlık fiyat | — | 46,91 | AKTİF | 🥈 VIP SWING İŞLEM: Gümüş satış, hedef 46,91. Swing işlemdir. Uzmanınızla iletişime geçin.
+17.11.2026 13:20 | NASDAQ | BUY | Anlık fiyat | — | 27550 | TP | ✅ HEDEF GELDİ! Nasdaq 100 alış işlemimiz 27550 hedefine ulaştı. VIP yatırımcılarımıza tebrikler!
+17.11.2026 13:42 | XAGUSD | SELL | Anlık fiyat | — | 46,91 | TP | 🏆 MUHTEŞEM KAZANÇ! Gümüş swing işlemimiz 46,91 hedefine ulaştı. Bu fırsatı yakalayan VIP yatırımcılarımızı tebrik ederiz! Bir sonraki fırsat için uzmanınızla iletişimde kalın.
+SAYAÇ | 18.11.2026 14:15 | Yeni VIP İşlem Geliyor! | Bir sonraki VIP fırsatımız çok yakında açıklanıyor. Yön ve seviyeler yalnızca VIP yatırımcılarımızla paylaşılacak; yerinizi şimdiden uzmanınızdan ayırtın.
