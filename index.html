@@ -81,6 +81,11 @@ label{font-size:12px;color:var(--mut);display:block;margin:10px 0 5px;letter-spa
 .ct-card{position:relative;overflow:hidden;border-color:rgba(212,175,55,.4)!important}
 .ct-lock{text-align:center;padding:34px 24px}
 .ct-lock .big{font-size:44px;margin-bottom:8px}
+.ct-gear{display:inline-block;animation:ctspin 6s linear infinite}
+@keyframes ctspin{to{transform:rotate(360deg)}}
+.ct-maint{height:4px;max-width:260px;margin:0 auto;border-radius:4px;background:var(--line);overflow:hidden}
+.ct-maint i{display:block;height:100%;width:40%;background:var(--grad);border-radius:4px;animation:ctbar 2.2s ease-in-out infinite}
+@keyframes ctbar{0%{transform:translateX(-100%)}100%{transform:translateX(250%)}}
 .ct-steps{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .ct-steps span{font-size:11.5px;letter-spacing:1px;padding:5px 12px;border-radius:20px;border:1px solid var(--line);color:var(--mut)}
 .ct-steps span.on{border-color:var(--gold);color:var(--gold2);background:rgba(212,175,55,.08)}
@@ -1346,6 +1351,7 @@ function boot(){
 
 /* ---- COBRA: Çekim Talebi ---- */
 const CTKEY = "joyfx_vip_cekim", CT_MIN = 100;
+const CT_BAKIM = true;   // true = bakım ekranı gösterilir · açmak için false yapın
 function ctList(){ try{ return JSON.parse(localStorage.getItem(CTKEY)||"[]"); }catch(e){ return []; } }
 function ctSave(l){ try{ localStorage.setItem(CTKEY, JSON.stringify(l.slice(0,50))); }catch(e){} }
 const ctFmt = n => Number(n).toLocaleString("tr-TR",{maximumFractionDigits:2});
@@ -1364,6 +1370,14 @@ function ctHist(){
 function ctOpen(){
   const box = $("#ctBox"); if (!box) return;
   const s = window._session;
+  if (CT_BAKIM){
+    box.innerHTML = `<div class="card ct-card ct-lock"><div class="big ct-gear">⚙️</div><h3>Planlı Bakım Çalışması</h3>
+      <p class="muted" style="margin:8px 0 6px">Çekim Talebi hizmetimiz, size daha güvenli ve hızlı bir deneyim sunabilmek için altyapı güncellemesi kapsamında geçici olarak bakımdadır.</p>
+      <p class="muted" style="margin:0 0 18px">Bu süreçte çekim talepleriniz için kişisel uzmanınız her zaman yanınızda. Anlayışınız için teşekkür ederiz.</p>
+      <div class="ct-maint"><i></i></div>
+      <a class="btn pri" style="margin-top:18px" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" çekim işlemim hakkında bilgi almak istiyorum.")}">💬 Uzmanımla iletişime geç</a></div>`;
+    return;
+  }
   if (s && s.trial){
     box.innerHTML = `<div class="card ct-card ct-lock"><div class="big">🔒</div><h3>Tam VIP üyelerimize özel</h3>
       <p class="muted" style="margin:8px 0 18px">Çekim Talebi bölümü deneme erişiminde kullanılamaz. Tam VIP erişim için uzmanınızla iletişime geçin.</p>
