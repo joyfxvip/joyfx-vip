@@ -1,0 +1,38 @@
+# ============================================================
+#  JOY FX · UZMAN ANALİZLERİ (Günün VIP Teknik Analizi)
+# ============================================================
+#  Her analiz bir blok. Blokları  ---  satırıyla ayırın.
+#  En alta yazılan analiz sitede "Günün Analizi" olarak görünür;
+#  öncekiler "Önceki Analizler" listesine iner.
+#
+#  TARİH  : 19.11.2026
+#  UZMAN  : Uzmanın adı soyadı
+#  UNVAN  : (isteğe bağlı) VIP Uzman
+#  SEMBOL : XAUUSD, NASDAQ, XAGUSD ... (canlı grafik bu sembolle açılır)
+#  GÖRÜŞ  : Düşüş / Yükseliş / Nötr
+#  KRİTİK, DESTEK, DİRENÇ, HEDEF : (isteğe bağlı) seviyeler
+#  GÖRSEL : (isteğe bağlı) analiz/resim1.jpg, analiz/resim2.jpg
+#           → yoksa sembolün canlı grafiği gösterilir
+#  BAŞLIK : Analizin başlığı
+#  METİN  : (bu satırdan sonra analizin tamamı; paragraflar arasında boş satır)
+#
+#  "#" ile başlayan satırlar sitede GÖRÜNMEZ.
+# ============================================================
+
+TARİH: 19.11.2026
+UZMAN: Ege Yıldırım
+UNVAN: VIP Uzman
+SEMBOL: XAUUSD
+GÖRÜŞ: Düşüş
+KRİTİK: 3.828
+HEDEF: 3.620
+GÖRSEL: analiz/altin-1911-kanal.jpg, analiz/altin-1911-flama.jpg
+BAŞLIK: Altında düşen kanal kırıldı: Ayı flaması 3.620'yi işaret ediyor
+METİN:
+Altın uzun süredir eğimli bir düşen kanal içinde hareket ediyor. Kanalın üst bandından gelen satışlar her tepki yükselişini sınırlarken, alt banttaki destek tepkileri giderek zayıfladı. Bu tablo, satıcıların piyasa üzerindeki kontrolünü artırdığına işaret ediyor.
+
+Kanalın alt bandı açısından kritik eşik olan 3.828 bölgesinin aşağı yönlü kırılmasıyla satış baskısı hızlandı ve fiyat kanalın dışına taşarak sert bir geri çekilme yaşadı.
+
+Düşüşün ardından oluşan daralan konsolidasyon, olası bir ayı flaması (bearish flag) olarak izleniyor. Formasyonun alt sınırı aşağı yönlü kırılırsa ana düşüş hareketinin devamı beklenebilir.
+
+Formasyonun tamamlanması hâlinde yaklaşık 70 dolarlık ilave bir düşüş teknik olarak gündeme gelebilir. Daha geniş perspektifte ise 3.620 bölgesi, olası satış dalgasında fiyatın iğne atabileceği önemli bir alt hedef olarak öne çıkıyor.
