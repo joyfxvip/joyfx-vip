@@ -1258,7 +1258,7 @@ function parseCountdown(lines){
   const f = l.split("|").map(x=>x.trim());
   const m = (f[1]||"").match(/(\d{1,2})\.(\d{1,2})\.(\d{4})\s+(\d{1,2})[:.](\d{2})/); if (!m) return null;
   const t = Date.UTC(+m[3], +m[2]-1, +m[1], +m[4]-3, +m[5]);   // İstanbul saati (UTC+3)
-  return { t, baslik: f[2] || "Yeni VIP işlem geliyor", metin: f.slice(3).join(" | ") };
+  return { t, baslik: f[2] || "Yeni VIP işlem geliyor", metin: f[3] || "", yb: f[4] || "", ym: f.slice(5).join(" | ") };   // 5. ve 6. alan: açıklanınca gösterilecek başlık/metin (isteğe bağlı)
 }
 function parseSigs(text){
   const all = text.replace(/\r/g,"").split("\n").map(l=>l.trim()).filter(l=>l && !l.startsWith("#"));
@@ -1330,8 +1330,8 @@ function renderCountdown(){
   const html = `<div class="cd ${done?"done":""}"><div class="cd-in">
       <div>
         <span class="cd-tag">${done?"⚡ YAYINDA":"🔥 YENİ · GERİ SAYIM"}</span>
-        <h3>${done?"Yeni VIP işlem açıklandı!":esc(CD.baslik)}</h3>
-        <p>${done?"İşlem detayları için hemen uzmanınızla iletişime geçin.":esc(CD.metin||"Yön ve seviyeler yalnızca VIP yatırımcılarımızla paylaşılacak. Yerinizi uzmanınızdan ayırtın.")}</p>
+        <h3>${done?esc(CD.yb||"Yeni VIP işlem açıklandı!"):esc(CD.baslik)}</h3>
+        <p>${done?esc(CD.ym||"İşlem detayları için hemen uzmanınızla iletişime geçin."):esc(CD.metin||"Yön ve seviyeler yalnızca VIP yatırımcılarımızla paylaşılacak. Yerinizi uzmanınızdan ayırtın.")}</p>
         <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">${done?`<a class="btn pri" href="#islem" onclick="show('islem');return false;">📈 VIP İşlemleri gör</a><a class="btn" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" yeni açıklanan VIP işlem hakkında bilgi almak istiyorum.")}">💬 Uzmanıma sor</a>`:`<a class="btn pri" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" yeni VIP işlem için yerimi ayırtmak istiyorum.")}">💬 Yerimi ayırt</a>`}</div>
       </div>
       <div class="cd-clock">
