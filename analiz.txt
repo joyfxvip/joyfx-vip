@@ -63,5 +63,3 @@ Mevcut fiyat hareketinde de aynı yapının yeniden oluşabileceğini değerlend
 💰 YATIRIM POTANSİYELİ — İşlem büyüklüğü: 10 LOT · Bağlanan teminat: 5.000 USD · Potansiyel kazanç: 21.000 USD · Teminata göre potansiyel getiri: %420
 
 Beş kez gözlemlenen fiyat döngüsünün altıncı kez tekrarlanması beklentisiyle bu bölgeyi yakından takip ediyoruz.
-
-⚠️ Kaldıraçlı işlemlerde fiyat beklentinin tersine hareket ederse benzer büyüklükte zarar da oluşabilir; lot ve stop ayarı için uzmanınızla görüşün.
