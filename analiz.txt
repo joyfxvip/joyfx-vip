@@ -11,6 +11,8 @@
 #  SEMBOL : XAUUSD, NASDAQ, XAGUSD ... (canlı grafik bu sembolle açılır)
 #  GÖRÜŞ  : Düşüş / Yükseliş / Nötr
 #  KRİTİK, DESTEK, DİRENÇ, HEDEF : (isteğe bağlı) seviyeler
+#  SONUÇ  : (isteğe bağlı) analiz başarılı olunca yazın → kartta 🏆 BAŞARILI ANALİZ şeridi çıkar
+#  ARŞİV  : (isteğe bağlı) 20.11.2026 23:59 → bu saatten sonra ana sayfadan kalkar, Önceki Analizler'e iner
 #  GÖRSEL : (isteğe bağlı) analiz/resim1.jpg, analiz/resim2.jpg
 #           → yoksa sembolün canlı grafiği gösterilir
 #  BAŞLIK : Analizin başlığı
@@ -26,6 +28,8 @@ SEMBOL: XAUUSD
 GÖRÜŞ: Düşüş
 KRİTİK: 3.828
 HEDEF: 3.620
+SONUÇ: Uzmanımız Ege Yıldırım'ın düşüş senaryosu başarıyla gerçekleşti! Bu analizle hareket eden VIP yatırımcılarımızı tebrik ederiz.
+ARŞİV: 20.11.2026 23:59
 GÖRSEL: analiz/altin-1911-kanal.jpg, analiz/altin-1911-flama.jpg
 BAŞLIK: Altında düşen kanal kırıldı: Ayı flaması 3.620'yi işaret ediyor
 METİN:
