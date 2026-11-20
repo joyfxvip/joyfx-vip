@@ -40,3 +40,28 @@ Kanalın alt bandı açısından kritik eşik olan 3.828 bölgesinin aşağı y�
 Düşüşün ardından oluşan daralan konsolidasyon, olası bir ayı flaması (bearish flag) olarak izleniyor. Formasyonun alt sınırı aşağı yönlü kırılırsa ana düşüş hareketinin devamı beklenebilir.
 
 Formasyonun tamamlanması hâlinde yaklaşık 70 dolarlık ilave bir düşüş teknik olarak gündeme gelebilir. Daha geniş perspektifte ise 3.620 bölgesi, olası satış dalgasında fiyatın iğne atabileceği önemli bir alt hedef olarak öne çıkıyor.
+
+---
+TARİH: 20.11.2026
+UZMAN: Seçkin Çalık
+UNVAN: VIP Uzman
+SEMBOL: USDCAD
+GÖRÜŞ: Düşüş
+KRİTİK: 1.42369
+HEDEF: 1.40000
+GÖRSEL: analiz/usdcad-2011-dongu.jpg
+BAŞLIK: USDCAD | 6. Döngü Satış Beklentisi
+METİN:
+USDCAD paritesinde geçmiş fiyat hareketlerini incelediğimizde, beş farklı dönemde benzer döngülerin tekrarlandığını görüyoruz.
+
+Mevcut fiyat hareketinde de aynı yapının yeniden oluşabileceğini değerlendiriyoruz. Altıncı döngü beklentimiz doğrultusunda aşağı yönlü hareketi takip ediyoruz.
+
+📍 TEKNİK HEDEF — Mevcut seviye: 1.43035 · Kritik eşik: 1.42369 · Beklenen hedef: 1.40000 · Beklenen hareket: 3.000 puan
+
+🌍 TEMEL BEKLENTİ — Petrol fiyatlarındaki güçlenme, Kanada ekonomisinden gelebilecek olumlu veriler ve ABD dolarında yaşanabilecek zayıflama, CAD lehine hareket oluşturarak paritedeki düşüşü destekleyebilir.
+
+💰 YATIRIM POTANSİYELİ — İşlem büyüklüğü: 10 LOT · Bağlanan teminat: 5.000 USD · Potansiyel kazanç: 21.000 USD · Teminata göre potansiyel getiri: %420
+
+Beş kez gözlemlenen fiyat döngüsünün altıncı kez tekrarlanması beklentisiyle bu bölgeyi yakından takip ediyoruz.
+
+⚠️ Kaldıraçlı işlemlerde fiyat beklentinin tersine hareket ederse benzer büyüklükte zarar da oluşabilir; lot ve stop ayarı için uzmanınızla görüşün.
