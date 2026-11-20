@@ -114,6 +114,20 @@ label{font-size:12px;color:var(--mut);display:block;margin:10px 0 5px;letter-spa
 .an-item:last-child{border:none}
 .an-item .t{font-weight:600}.an-item .m{font-size:12px;color:var(--mut)}
 .an-empty{text-align:center;padding:30px;color:var(--mut)}
+.an-home.won{border-color:rgba(234,179,8,.55)!important;box-shadow:0 0 0 1px rgba(234,179,8,.15),0 10px 40px rgba(234,179,8,.08)}
+.an-win{position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;padding:12px 20px;background:linear-gradient(90deg,rgba(234,179,8,.2),rgba(234,179,8,.05) 60%,rgba(43,179,214,.08));border-bottom:1px solid rgba(234,179,8,.35)}
+.an-win .cup{font-size:30px;animation:cupj 2.4s ease-in-out infinite;flex:none}
+@keyframes cupj{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(-4px) rotate(-8deg)}60%{transform:translateY(0) rotate(6deg)}}
+.an-win b{display:block;font-size:12px;letter-spacing:2.5px;color:#fcd34d}
+.an-win span{font-size:13.5px;color:#fef3c7;line-height:1.5}
+.an-win:after{content:"";position:absolute;top:0;left:-40%;width:35%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,240,180,.22),transparent);animation:winsh 3.5s ease-in-out infinite}
+@keyframes winsh{0%,40%{left:-40%}100%{left:120%}}
+.an-win i{position:absolute;width:6px;height:6px;border-radius:1px;top:-8px;opacity:.9;animation:conf 3.2s linear infinite}
+.an-win i:nth-of-type(1){left:12%;background:#fcd34d}.an-win i:nth-of-type(2){left:30%;background:#8fe3f5;animation-delay:.6s}.an-win i:nth-of-type(3){left:48%;background:#86efac;animation-delay:1.2s}
+.an-win i:nth-of-type(4){left:64%;background:#fcd34d;animation-delay:1.8s}.an-win i:nth-of-type(5){left:80%;background:#f9a8d4;animation-delay:.3s}.an-win i:nth-of-type(6){left:92%;background:#8fe3f5;animation-delay:2.4s}
+@keyframes conf{0%{transform:translateY(0) rotate(0)}100%{transform:translateY(90px) rotate(540deg);opacity:0}}
+.an-cup{font-size:11px;font-weight:700;color:#fcd34d;border:1px solid rgba(234,179,8,.45);border-radius:10px;padding:1px 8px;margin-right:4px}
+@media (prefers-reduced-motion:reduce){.an-win .cup,.an-win:after,.an-win i{animation:none}.an-win i{display:none}}
 #anZoom{position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
 #anZoom.on{display:flex} #anZoom img{max-width:100%;max-height:100%;border-radius:10px}
 @media (max-width:900px){.an-body{grid-template-columns:1fr}.an-vis{border-left:none;border-top:1px solid var(--line);min-height:260px}}
@@ -1414,6 +1428,7 @@ function boot(){
   initSigs(); loadSigs(); setInterval(loadSigs, 60000);
   $("#anZoom").onclick = () => $("#anZoom").classList.remove("on");
   loadAnaliz(); setInterval(loadAnaliz, 300000);
+  setInterval(() => { const st = ANS.map(anArch).join(); if (st !== renderAnaliz.st){ renderAnaliz.st = st; renderAnaliz.sel = false; renderAnaliz(); } }, 60000);
   const start = (location.hash||"").replace("#","");
   show(SECTIONS.some(s=>s[0]===start) ? start : "home");
   setTimeout(() => $("#intro").classList.add("hide"), 1900);
@@ -1466,26 +1481,41 @@ function anChart(a, id){
 function anExp(a){
   return `<div class="an-exp"><div class="an-av">${esc(anIni(a.UZMAN))}</div><div><b>${esc(a.UZMAN||CONFIG.marka+" Analiz Ekibi")}</b><span>${esc(a.UNVAN||"VIP Piyasa Analisti")}${a["TARİH"]?" · "+esc(a["TARİH"]):""}</span></div></div>`;
 }
+function anArsivT(a){ const m = String(a["ARŞİV"]||"").match(/(\d{1,2})\.(\d{1,2})\.(\d{4})(?:\s+(\d{1,2}):(\d{2}))?/); return m ? Date.UTC(+m[3], +m[2]-1, +m[1], (m[4]?+m[4]:23)-3, m[5]?+m[5]:59) : 0; }
+const anArch = a => { const t = anArsivT(a); return t && Date.now() >= t; };
+function anWin(a, big){
+  if (!a["SONUÇ"]) return "";
+  return `<div class="an-win ${big?"big":""}"><span class="cup">🏆</span><div><b>BAŞARILI ANALİZ</b><span>${esc(a["SONUÇ"])}</span></div><i></i><i></i><i></i><i></i><i></i><i></i></div>`;
+}
 function renderAnaliz(){
   const home = $("#anHome"), main = $("#anMain"), arch = $("#anArch");
+  if (!renderAnaliz.sel){ ANS.sort((x,y) => anArch(x) - anArch(y)); }
   const a = ANS[0];
+  const showMain = a && (renderAnaliz.sel || !anArch(a));
+  if (a && !showMain){
+    home.innerHTML = "";
+    main.innerHTML = `<div class="card an-empty">Yeni günün analizi çok yakında burada olacak. Önceki analizlerimizi aşağıdan inceleyebilirsiniz.</div>`;
+    arch.innerHTML = `<div class="card an-arch"><h3 style="margin-bottom:6px">Önceki Analizler</h3>${ANS.slice(0,15).map((x,i)=>`<div class="an-item" data-an="${i}"><div class="t">${x["SONUÇ"]?'<span class="an-cup">🏆 Başarılı</span> ':""}${esc(x["BAŞLIK"])}</div><div class="m">${esc(x.UZMAN||"")} · ${esc(x.SEMBOL||"")} · ${esc(x["TARİH"]||"")}</div></div>`).join("")}</div>`;
+    document.querySelectorAll("[data-an]").forEach(el => el.onclick = () => { const x = ANS.splice(+el.dataset.an,1)[0]; ANS.unshift(x); renderAnaliz.sel = true; renderAnaliz(); window.scrollTo({top:0,behavior:"smooth"}); });
+    return;
+  }
   if (!a){ home.innerHTML = ""; main.innerHTML = `<div class="card an-empty">Yeni uzman analizi çok yakında burada olacak.</div>`; arch.innerHTML = ""; return; }
   const sum = a.paras.join(" "); const short = sum.length > 280 ? sum.slice(0, sum.lastIndexOf(" ", 280)) + "…" : sum;
   const ask = waLink(CONFIG.marka+" günün VIP analizi ("+(a.SEMBOL||"")+") hakkında uzmanımla görüşmek istiyorum.");
-  home.innerHTML = `<div class="card an-home"><div class="an-rb"><span class="live"></span>GÜNÜN VIP TEKNİK ANALİZİ</div>
+  home.innerHTML = anArch(a) ? "" : `<div class="card an-home ${a["SONUÇ"]?"won":""}"><div class="an-rb"><span class="live"></span>GÜNÜN VIP TEKNİK ANALİZİ${a["SONUÇ"]?" · 🏆 BAŞARIYLA SONUÇLANDI":""}</div>${anWin(a,true)}
     <div class="an-body"><div class="an-txt">${anExp(a)}${anTags(a)}<div class="an-title">${esc(a["BAŞLIK"])}</div><div class="an-sum">${esc(short)}</div>
       <div class="an-btns"><button class="btn pri" onclick="show('analiz')">📖 Analizin tamamını oku</button><a class="btn" target="_blank" rel="noopener" href="${ask}">💬 Uzmanıma sor</a></div></div>
       <div class="an-vis">${anVis(a,"anHomeTv")}</div></div></div>`;
-  main.innerHTML = `<div class="card an-home"><div class="an-rb"><span class="live"></span>GÜNÜN UZMANI · ${esc((a.UZMAN||CONFIG.marka).toLocaleUpperCase("tr-TR"))}</div>
+  main.innerHTML = `<div class="card an-home ${a["SONUÇ"]?"won":""}"><div class="an-rb"><span class="live"></span>${anArch(a)?"GEÇMİŞ ANALİZ":"GÜNÜN UZMANI"} · ${esc((a.UZMAN||CONFIG.marka).toLocaleUpperCase("tr-TR"))}</div>${anWin(a,true)}
     <div class="an-body"><div class="an-txt">${anExp(a)}${anTags(a)}<div class="an-title">${esc(a["BAŞLIK"])}</div>
       <div class="an-full">${a.paras.map(p=>`<p>${esc(p)}</p>`).join("")}</div>
       <div class="an-btns"><a class="btn pri" target="_blank" rel="noopener" href="${ask}">💬 Bu analiz hakkında uzmanıma sor</a>${a.SEMBOL?`<button class="btn" data-anchart="${esc(tvSym(a.SEMBOL.toUpperCase().replace(/\s/g,"")))}">📈 Canlı grafikte aç</button>`:""}</div>
       <div class="an-disc">Bu içerik uzmanımızın piyasa görüşüdür; yatırım tavsiyesi değildir. İşlem kararlarınızı hesabınıza uygun risk yönetimiyle uzmanınızla birlikte verin.</div></div>
       <div class="an-vis">${anVis(a,"anMainTv",true)}</div></div></div>`;
-  arch.innerHTML = ANS.length > 1 ? `<div class="card an-arch"><h3 style="margin-bottom:6px">Önceki Analizler</h3>${ANS.slice(1,15).map((x,i)=>`<div class="an-item" data-an="${i+1}"><div class="t">${esc(x["BAŞLIK"])}</div><div class="m">${esc(x.UZMAN||"")} · ${esc(x.SEMBOL||"")} · ${esc(x["TARİH"]||"")}</div></div>`).join("")}</div>` : "";
+  arch.innerHTML = ANS.length > 1 ? `<div class="card an-arch"><h3 style="margin-bottom:6px">Önceki Analizler</h3>${ANS.slice(1,15).map((x,i)=>`<div class="an-item" data-an="${i+1}"><div class="t">${x["SONUÇ"]?'<span class="an-cup">🏆 Başarılı</span> ':""}${esc(x["BAŞLIK"])}</div><div class="m">${esc(x.UZMAN||"")} · ${esc(x.SEMBOL||"")} · ${esc(x["TARİH"]||"")}</div></div>`).join("")}</div>` : "";
   anChart(a,"anHomeTv");
   if ($("#s-analiz").classList.contains("on")) anChart(a,"anMainTv");
-  document.querySelectorAll("[data-an]").forEach(el => el.onclick = () => { const x = ANS.splice(+el.dataset.an,1)[0]; ANS.unshift(x); renderAnaliz(); window.scrollTo({top:0,behavior:"smooth"}); });
+  document.querySelectorAll("[data-an]").forEach(el => el.onclick = () => { const x = ANS.splice(+el.dataset.an,1)[0]; ANS.unshift(x); renderAnaliz.sel = true; renderAnaliz(); window.scrollTo({top:0,behavior:"smooth"}); });
   document.querySelectorAll("[data-anchart]").forEach(b => b.onclick = () => { show("chart"); const sel = $("#symSel"), v = b.dataset.anchart;
     if (![...sel.options].some(o => o.value === v)) sel.insertAdjacentHTML("beforeend", `<option value="${esc(v)}">${esc(v)}</option>`); sel.value = v; drawChart(); });
   document.querySelectorAll("[data-zoom]").forEach(im => im.onclick = () => { $("#anZoom img").src = im.src; $("#anZoom").classList.add("on"); });
