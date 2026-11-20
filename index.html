@@ -1467,7 +1467,7 @@ const anImgs = a => String(a["GÖRSEL"]||"").split(",").map(x=>x.trim()).filter(
 function anVis(a, id, all){
   const im = anImgs(a);
   if (!im.length) return `<div id="${id}" style="position:absolute;inset:0"></div>`;
-  return (all ? im : im.slice(0,1)).map(u => `<img src="${esc(u)}" alt="${esc(a["BAŞLIK"])}" data-zoom data-sym="${esc(a.SEMBOL||"")}" onerror="anImgErr(this)" style="${all&&im.length>1?"height:auto;object-fit:contain;border-bottom:1px solid var(--line)":""}">`).join("");
+  return (all ? im : im.slice(0,1)).map(u => `<img src="${esc(u)}" alt="${esc(a["BAŞLIK"])}" data-zoom data-sym="${esc(a.SEMBOL||"")}" onerror="anImgErr(this)" style="${all?"height:auto;object-fit:contain;border-bottom:1px solid var(--line)":""}">`).join("");
 }
 function anImgErr(img){
   const box = img.parentNode; img.remove();
