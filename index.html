@@ -314,6 +314,21 @@ body.locked #gate{display:flex}
 .st.aktif{color:var(--up);border-color:rgba(63,191,127,.45)} .st.aktif:before{content:"● ";animation:blink 1.4s infinite}
 .st.tp{color:var(--up);border-color:rgba(63,191,127,.45);background:rgba(63,191,127,.08)}
 .st.stop{color:var(--down);border-color:rgba(224,93,93,.45);background:rgba(224,93,93,.08)}
+.st.karda{color:#fde68a;border-color:rgba(234,179,8,.6);background:rgba(234,179,8,.12);animation:hotst 1.6s ease-in-out infinite}
+@keyframes hotst{50%{box-shadow:0 0 14px rgba(234,179,8,.45)}}
+.sig-card.hot{border-color:rgba(234,179,8,.6)!important;box-shadow:0 0 0 1px rgba(234,179,8,.25),0 12px 40px rgba(234,179,8,.12);animation:hotcard 2.6s ease-in-out infinite}
+@keyframes hotcard{50%{box-shadow:0 0 0 1px rgba(234,179,8,.45),0 12px 50px rgba(234,179,8,.25)}}
+.hot-rb{position:relative;overflow:hidden;margin:-22px -22px 0;padding:12px 16px;display:flex;align-items:center;justify-content:center;gap:12px;text-align:center;background:linear-gradient(90deg,#b45309,#eab308,#16a34a,#eab308,#b45309);background-size:300% 100%;animation:hotflow 5s linear infinite;color:#1a1200}
+@keyframes hotflow{to{background-position:-300% 0}}
+.hot-rb b{display:block;font-size:11px;font-weight:800;letter-spacing:2.5px}
+.hot-rb .amt{display:block;font-size:22px;font-weight:800;letter-spacing:.5px;line-height:1.2}
+.hot-rb .fire{font-size:24px;animation:cupj 1.8s ease-in-out infinite}
+.hot-rb:after{content:"";position:absolute;top:0;left:-40%;width:30%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.45),transparent);animation:winsh 2.8s ease-in-out infinite}
+.hot-bar{position:relative;margin:0 -22px 16px;height:22px;background:rgba(234,179,8,.12);border-bottom:1px solid rgba(234,179,8,.35)}
+.hot-bar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,rgba(22,163,74,.55),rgba(234,179,8,.65));animation:hotgrow 1.6s ease-out}
+@keyframes hotgrow{from{width:0}}
+.hot-bar span{position:relative;display:block;text-align:center;font-size:11px;font-weight:700;letter-spacing:1px;line-height:22px;color:#fef3c7}
+@media (prefers-reduced-motion:reduce){.sig-card.hot,.hot-rb,.hot-rb .fire,.hot-rb:after,.st.karda{animation:none}}
 .st.bekle{color:var(--gold2);border-color:rgba(43,179,214,.45)}
 .sig-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin-bottom:12px}
 .sig-note{font-size:13.5px;margin-bottom:14px;padding:10px 12px;border-left:2px solid var(--gold);background:rgba(43,179,214,.05);border-radius:0 8px 8px 0}
@@ -1246,6 +1261,7 @@ function splitRow(line, sep){
 }
 function normStatus(s){
   s = (s||"").toLocaleUpperCase("tr-TR").trim();
+  if (/K[AÂ]RDA/.test(s)) return ["karda","🔥 KÂRDA", s.replace(/^.*?K[AÂ]RDA\s*/,"")];   // ör. "KÂRDA +130.000 USD (%54)"
   if (/TP|HEDEF|KAR|KÂR/.test(s)) return ["tp","TP ✓"];
   if (/STOP|SL|ZARAR/.test(s)) return ["stop","STOP ✕"];
   if (/BEKLE|LİMİT|LIMIT|PENDING/.test(s)) return ["bekle","BEKLEMEDE"];
@@ -1273,9 +1289,9 @@ function parseSigs(text){
     const dir = /SELL|SAT/i.test(yon) ? "sell" : /BUY|AL/i.test(yon) ? "buy" : "info";
     const tpRaw = String(tp||"").split("/").map(x=>x.trim()).filter(x=>x && !isNaN(numTR(x)));
     const tps = tpRaw.map(numTR);
-    const [stKey, stLbl] = normStatus(durum);
+    const [stKey, stLbl, stEx] = normStatus(durum);
     return { i, tarih: tarih||"", sym: (sembol||"").toUpperCase().replace(/\s/g,""), dir,
-             entry: numTR(giris), sl: numTR(stop), tps, raw:{e:(giris||"").trim(), s:(stop||"").trim(), t:tpRaw, tt:(tp||"").trim()}, stKey, stLbl, note: not.join(sep==="|"?" | ":", ").trim() };
+             entry: numTR(giris), sl: numTR(stop), tps, raw:{e:(giris||"").trim(), s:(stop||"").trim(), t:tpRaw, tt:(tp||"").trim()}, stKey, stLbl, stEx: stEx||"", note: not.join(sep==="|"?" | ":", ").trim() };
   }).filter(s => s.sym).reverse();
 }
 function pipSize(sym, price){
@@ -1291,12 +1307,18 @@ function tvSym(sym){
 }
 const fmtN = v => isNaN(v) ? "—" : String(v);
 const DIRL = {buy:"▲ BUY", sell:"▼ SELL", info:"📣 DUYURU"}, DIRW = {buy:"BUY", sell:"SELL", info:"DUYURU"};
+function hotRb(s){
+  const m = s.stEx.match(/%\s*(\d{1,3})/), pct = m ? Math.min(100,+m[1]) : 0;
+  const amt = s.stEx.replace(/\(?%\s*\d{1,3}\)?/,"").trim();
+  return `<div class="hot-rb"><span class="fire">🔥</span><div><b>ANLIK KÂRDA</b>${amt?`<span class="amt">${esc(amt)}</span>`:""}</div><span class="fire">💰</span></div>
+    ${pct?`<div class="hot-bar"><i style="width:${pct}%"></i><span>Hedefin %${pct}'i alındı</span></div>`:""}`;
+}
 function sigCard(s){
   const ps = pipSize(s.sym, s.entry), risk = Math.abs(s.entry - s.sl);
   const tpHtml = s.tps.length ? s.tps.map((t,k)=>`<div class="lv tp"><div class="k">TP${s.tps.length>1?k+1:""}</div><div class="n">${esc(s.raw.t[k])}</div><div class="d">${isNaN(s.entry)||!ps?"":Math.round(Math.abs(t-s.entry)/ps)+" pip"}${risk?` · 1:${(Math.abs(t-s.entry)/risk).toFixed(1)}`:""}</div></div>`).join("") : `<div class="lv tp"><div class="k">TP</div><div class="n">${esc(s.raw.tt||"—")}</div></div>`;
   const closed = ["stop","kapali"].includes(s.stKey), won = s.stKey==="tp", star = won && /🏆/.test(s.note), lost = s.stKey==="stop";
   const txt = `${CONFIG.marka} VIP İşlem\n${s.sym} ${DIRW[s.dir]}\nGiriş: ${s.raw.e||"—"}\nStop: ${s.raw.s||"—"}\nTP: ${s.raw.t.join(" / ")||"—"}`;
-  return `<div class="sig-card ${s.dir} ${closed&&!lost?"closed":""} ${won?"won":""} ${star?"star":""} ${lost?"lost":""}">${won?`<div class="won-rb">${star?"🏆 HARİKA KAZANÇ":"✅ HEDEFE ULAŞTI"}</div>`:""}${lost?`<div class="lost-rb">🛡️ STOP İLE KORUNDU</div><div class="rain" aria-hidden="true"><div class="cl">🌧️</div><i style="left:4px"></i><i></i><i></i><i></i><i></i></div>`:""}
+  return `<div class="sig-card ${s.dir} ${s.stKey==="karda"?"hot":""} ${closed&&!lost?"closed":""} ${won?"won":""} ${star?"star":""} ${lost?"lost":""}">${won?`<div class="won-rb">${star?"🏆 HARİKA KAZANÇ":"✅ HEDEFE ULAŞTI"}</div>`:""}${s.stKey==="karda"?hotRb(s):""}${lost?`<div class="lost-rb">🛡️ STOP İLE KORUNDU</div><div class="rain" aria-hidden="true"><div class="cl">🌧️</div><i style="left:4px"></i><i></i><i></i><i></i><i></i></div>`:""}
     <div class="sig-h">
       <div><div class="sig-sym">${esc(s.sym)}</div><div class="muted small">${esc(s.tarih)}</div></div>
       <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
@@ -1351,11 +1373,11 @@ function renderCountdown(){
   });
 }
 function renderSigs(){
-  const act = SIGS.filter(s => ["aktif","bekle"].includes(s.stKey));
+  const act = SIGS.filter(s => ["aktif","bekle","karda"].includes(s.stKey));
   if (sigFirst && SIGS.length){ sigFirst = false; if (!act.length){ sigFilter = "kapali"; document.querySelectorAll("[data-f]").forEach(x => x.classList.toggle("on", x.dataset.f==="kapali")); } }
   ["#cdHome","#cdIslem"].forEach(s => { const b=$(s); if (b) b.dataset.done = ""; });
   renderCountdown(); if (!cdTimer) cdTimer = setInterval(renderCountdown, 1000);
-  const list = sigFilter==="aktif" ? act : sigFilter==="kapali" ? SIGS.filter(s=>!["aktif","bekle"].includes(s.stKey)) : SIGS;
+  const list = sigFilter==="aktif" ? act : sigFilter==="kapali" ? SIGS.filter(s=>!["aktif","bekle","karda"].includes(s.stKey)) : SIGS;
   $("#sigList").innerHTML = list.length ? list.map(sigCard).join("") :
     `<div class="card empty" style="grid-column:1/-1"><div style="font-size:34px">🎯</div><h3 style="margin:8px 0 4px">${sigFilter==="aktif"?"Şu an aktif işlem önerisi yok":"Henüz kayıt yok"}</h3><div>Yeni öneriler paylaşıldığında burada görünür. Sayfa otomatik yenilenir.</div></div>`;
   const b = $("#sigBadge"); if (b){ b.textContent = act.length; b.style.display = act.length ? "" : "none"; }
