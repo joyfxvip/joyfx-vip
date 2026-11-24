@@ -261,6 +261,33 @@ body.locked #gate{display:flex}
 .uz-chip a,.uz-chip button{all:unset;cursor:pointer;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
 .uz-chip a{background:var(--grad);color:#03202b}
 .uz-chip button{color:var(--mut)} .uz-chip button:hover{color:var(--gold2)}
+#bvModal{position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.72);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+#bvModal.on{display:flex}
+#bvModal .gate-box{max-width:440px;padding:30px 28px 24px;max-height:92vh;overflow:auto}
+.bv-q{font-size:12px;letter-spacing:1.5px;color:var(--gold2);text-transform:uppercase;margin:14px 0 8px;font-weight:700}
+.bv-ch{display:flex;flex-wrap:wrap;gap:7px}
+.bv-ch button{padding:9px 13px;border-radius:12px;border:1px solid var(--line,rgba(255,255,255,.14));background:rgba(255,255,255,.03);color:inherit;font:inherit;font-size:13.5px;cursor:pointer}
+.bv-ch button.on{background:var(--grad);color:#03202b;border-color:transparent;font-weight:700}
+.bv-ok{display:none;text-align:center;padding:10px 0}
+.bv-ok b{display:block;font-size:20px;margin:8px 0}
+.bvh{position:relative;overflow:hidden;margin-bottom:18px;border-radius:20px;padding:2px;background:linear-gradient(120deg,#2bb3d6,#fcd34d,#16a34a,#2bb3d6);background-size:300% 100%;animation:hotflow 7s linear infinite}
+.bvh-in{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:22px 24px;border-radius:18px;background:radial-gradient(500px 180px at 90% 0%,rgba(43,179,214,.22),transparent 70%),linear-gradient(135deg,#06182a,#081320)}
+.bvh-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:800;letter-spacing:2.5px;color:#86efac}
+.bvh-tag i{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.7);animation:anlive 1.6s infinite}
+.bvh h3{font-family:"Cormorant Garamond",Georgia,serif;font-size:27px;margin:6px 0 4px;color:#fff}
+.bvh p{margin:0;color:#cfe8f1;font-size:14px;line-height:1.55;max-width:620px}
+.bvh-steps{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12.5px;color:#9fd5e6}
+.bvh-steps span b{color:#fcd34d}
+.bvh-go{font-size:16px!important;padding:15px 24px!important;border-radius:14px!important;white-space:nowrap;box-shadow:0 8px 28px rgba(43,179,214,.4);animation:bvpulse 2.2s infinite}
+@keyframes bvpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.bvh.done .bvh-go{animation:none}
+.sig-bv{margin-top:12px;display:flex;align-items:center;gap:10px;justify-content:space-between;flex-wrap:wrap;padding:11px 13px;border-radius:12px;background:linear-gradient(90deg,rgba(252,211,77,.12),rgba(43,179,214,.08));border:1px dashed rgba(252,211,77,.45)}
+.sig-bv span{font-size:12.5px;color:#fde68a;line-height:1.4}
+.sig-bv .btn{font-weight:700}
+#bvFab{position:fixed;left:18px;bottom:18px;z-index:800;display:none;align-items:center;gap:8px;padding:13px 18px;border-radius:40px;border:0;cursor:pointer;font:inherit;font-weight:800;font-size:14px;color:#1a1405;background:linear-gradient(90deg,#fde68a,#fcd34d);box-shadow:0 10px 30px rgba(252,211,77,.4);animation:bvpulse 2.2s infinite}
+body:not(.locked) #bvFab{display:inline-flex}
+@media (max-width:640px){.bvh-in{padding:18px}.bvh h3{font-size:22px}.bvh-go{width:100%}#bvFab{left:12px;bottom:12px;padding:11px 15px;font-size:13px}}
+@media (prefers-reduced-motion:reduce){.bvh,.bvh-go,#bvFab{animation:none}}
 #yatModal{position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
 #yatModal.on{display:flex}
 #yatModal .gate-box{padding:34px 30px 26px}
@@ -455,6 +482,27 @@ body.locked #gate{display:flex}
   </form>
 </div>
 
+<button id="bvFab" onclick="openBv('')">🚀 VIP Proje Başvurusu</button>
+<!-- VIP proje başvurusu -->
+<div id="bvModal">
+  <form class="gate-box" id="bvForm">
+    <div id="bvBody">
+      <div class="t2" style="margin:0 0 4px">🚀 SIRADAKİ VIP PROJE BAŞVURUSU</div>
+      <p class="muted" style="margin:0 0 4px" id="bvSub">Başvurunuz doğrudan kişisel uzmanınıza iletilir; size özel giriş planı hazırlanır.</p>
+      <div class="bv-q">Planladığınız işlem büyüklüğü</div>
+      <div class="bv-ch" data-k="lot"><button type="button">1 – 5 lot</button><button type="button">5 – 20 lot</button><button type="button">20 lot üzeri (VIP proje)</button></div>
+      <div class="bv-q">İlgilendiğiniz piyasa</div>
+      <div class="bv-ch" data-k="pz" data-multi="1"><button type="button">Altın</button><button type="button">Gümüş</button><button type="button">Endeksler</button><button type="button">Enerji</button><button type="button">Hisseler</button></div>
+      <div class="bv-q">Uzmanınız size ne zaman ulaşsın?</div>
+      <div class="bv-ch" data-k="zm"><button type="button">Hemen</button><button type="button">Bugün</button><button type="button">Bu hafta</button></div>
+      <div class="gate-err" id="bvErr"></div>
+      <button type="submit" class="gate-btn" style="margin-top:14px">🚀 Başvurumu uzmanıma gönder</button>
+      <button type="button" class="logout" id="bvCancel" style="margin-top:10px">Vazgeç</button>
+    </div>
+    <div class="bv-ok" id="bvOk"><div style="font-size:46px">✅</div><b>Başvurunuz hazır!</b><p class="muted">WhatsApp'ta açılan mesajı uzmanınıza göndermeniz yeterli. Uzmanınız size özel giriş planıyla dönüş yapacak.</p><button type="button" class="gate-btn" id="bvClose" style="margin-top:10px">Tamam</button></div>
+  </form>
+</div>
+
 <!-- Uzman düzenleme -->
 <div id="uzModal">
   <form class="gate-box" id="uzForm" style="max-width:380px">
@@ -508,6 +556,7 @@ body.locked #gate{display:flex}
       <div class="mcard" id="memberCard" style="display:none"></div>
       <div id="kutHome"></div>
       <div id="cdHome"></div>
+      <div id="bvHome"></div>
       <div id="anHome"></div>
       <div class="card glow announce" style="margin-bottom:18px">
         <div class="ico">📣</div>
@@ -532,6 +581,7 @@ body.locked #gate{display:flex}
     <section id="s-islem">
       <div id="kutIslem"></div>
       <div id="cdIslem"></div>
+      <div id="bvIslem"></div>
       <div class="sig-top">
         <div><h2 class="gold">VIP İşlem Önerileri</h2><div class="muted small" id="sigUpd">Yükleniyor…</div></div>
         <div class="btnrow" style="margin:0" id="sigFilters">
@@ -1302,10 +1352,50 @@ function parseKutlama(lines){
   const m = (f[1]||"").match(/(\d{1,2})\.(\d{1,2})\.(\d{4})\s+(\d{1,2})[:.](\d{2})/); if (!m) return null;
   return { end: Date.UTC(+m[3], +m[2]-1, +m[1], +m[4]-3, +m[5]), baslik: f[2]||"", metin: f.slice(3).join(" | ") };
 }
+/* ===== Sıradaki VIP proje başvurusu ===== */
+const BVKEY = "joy_bv";
+let bvFrom = "";
+function bvGet(){ try{ return JSON.parse(localStorage.getItem(BVKEY)||"null"); }catch(e){ return null; } }
+function renderBv(){
+  const won = SIGS.filter(s => s.stKey==="tp");
+  const last = won.slice().sort((a,b)=>b.i-a.i)[0];
+  const bv = bvGet(), recent = bv && Date.now()-bv.t < 3*864e5;
+  const lastTxt = last ? `Son VIP işlemimiz <b>${esc(last.sym)}</b> hedefine ulaştı ✅` : "";
+  const html = `<div class="bvh ${recent?"done":""}"><div class="bvh-in"><div>
+      <span class="bvh-tag"><i></i>BAŞVURULAR AÇIK</span>
+      <h3>${recent?"Başvurunuz uzmanınızda ✅":"Sıradaki VIP projede yerinizi alın"}</h3>
+      <p>${recent?`${esc(bv.lot)} · ${esc(bv.pz)} — uzmanınız size özel giriş planıyla dönüş yapacak. Bilgilerinizi güncellemek isterseniz tekrar başvurabilirsiniz.`:`${lastTxt ? lastTxt+" " : ""}Bir sonraki VIP proje açıldığında ilk haberdar olan, giriş seviyesini ilk alan siz olun.`}</p>
+      ${recent?"":`<div class="bvh-steps"><span><b>1.</b> Başvur</span><span><b>2.</b> Uzmanın planını alır</span><span><b>3.</b> VIP işleme ilk sen gir</span></div>`}
+    </div><button class="btn pri bvh-go" onclick="openBv('')">${recent?"🔁 Başvurumu güncelle":"🚀 Hemen başvur"}</button></div></div>`;
+  ["#bvHome","#bvIslem"].forEach(id => { const el=$(id); if (el && el.dataset.h!==html){ el.innerHTML=html; el.dataset.h=html; } });
+}
+function openBv(sym){
+  bvFrom = sym||"";
+  $("#bvSub").textContent = sym ? `${sym} işleminin ardından sıradaki VIP projeye başvurunuz doğrudan kişisel uzmanınıza iletilir.` : "Başvurunuz doğrudan kişisel uzmanınıza iletilir; size özel giriş planı hazırlanır.";
+  $("#bvBody").style.display=""; $("#bvOk").style.display="none"; $("#bvErr").textContent="";
+  document.querySelectorAll("#bvForm .bv-ch button").forEach(b=>b.classList.remove("on"));
+  $("#bvModal").classList.add("on");
+}
+document.querySelectorAll("#bvForm .bv-ch").forEach(g => g.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  if (g.dataset.multi) b.classList.toggle("on"); else { g.querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on"); }
+}));
+const bvVal = k => [...document.querySelectorAll(`#bvForm .bv-ch[data-k=${k}] button.on`)].map(b=>b.textContent).join(", ");
+$("#bvForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const lot = bvVal("lot"), pz = bvVal("pz"), zm = bvVal("zm");
+  if (!lot){ $("#bvErr").textContent = "Lütfen planladığınız işlem büyüklüğünü seçin."; return; }
+  const msg = `Merhaba, ${CONFIG.marka} sıradaki VIP projeye başvurmak istiyorum 🚀${bvFrom?`\n(${bvFrom} işleminin ardından)`:""}\n• İşlem büyüklüğü: ${lot}${pz?`\n• Piyasa: ${pz}`:""}${zm?`\n• Bana ulaşın: ${zm}`:""}\nGiriş planımı hazırlar mısınız?`;
+  try{ localStorage.setItem(BVKEY, JSON.stringify({t:Date.now(), lot, pz:pz||"Tüm piyasalar"})); }catch(_){}
+  window.open(waLink(msg), "_blank", "noopener");
+  $("#bvBody").style.display="none"; $("#bvOk").style.display="block"; renderBv();
+});
+$("#bvCancel").onclick = $("#bvClose").onclick = () => $("#bvModal").classList.remove("on");
+$("#bvModal").addEventListener("click", e => { if (e.target.id==="bvModal") $("#bvModal").classList.remove("on"); });
 function renderKutlama(){
   const on = KUT && Date.now() < KUT.end;
   const html = on ? `<div class="kut"><div class="kut-in"><div class="kut-cup">🏆</div><div class="kut-tx"><span class="kut-tag">VIP BAŞARI</span><h2>${esc(KUT.baslik)}</h2><p>${esc(KUT.metin)}</p>
-    <div class="kut-btns"><button class="btn pri" onclick="show('islem');setTimeout(()=>{const b=document.querySelector('[data-f=kapali]'); if(b) b.click();},50)">🏆 İşlemi gör</button><a class="btn" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" bir sonraki VIP işleme ben de katılmak istiyorum.")}">💬 Sonraki VIP işleme katıl</a></div></div></div>${'<i></i>'.repeat(14)}</div>` : "";
+    <div class="kut-btns"><button class="btn pri" onclick="show('islem');setTimeout(()=>{const b=document.querySelector('[data-f=kapali]'); if(b) b.click();},50)">🏆 İşlemi gör</button><button class="btn" style="background:linear-gradient(90deg,#fde68a,#fcd34d);color:#1a1405;border:0;font-weight:800" onclick="openBv('')">🚀 Sıradaki VIP projeye başvur</button></div></div></div>${'<i></i>'.repeat(14)}</div>` : "";
   ["#kutHome","#kutIslem"].forEach(id => { const el = $(id); if (el && el.dataset.h !== html){ el.innerHTML = html; el.dataset.h = html; } });
 }
 function parseSigs(text){
@@ -1375,6 +1465,7 @@ function sigCard(s){
       ${tpHtml}
     </div>
     ${s.note?`<div class="sig-note">${esc(s.note)}</div>`:""}
+    ${won?`<div class="sig-bv"><span>🏆 Bu VIP işlemi kaçırdınız mı? Sıradaki projede yerinizi alın.</span><button class="btn pri" onclick="openBv('${esc(s.sym)}')">🚀 Sıradakine başvur</button></div>`:""}
     ${lost?`<div class="lost-msg"><span class="sh">🛡️</span><span>Bu sefer piyasa bizden yana değildi. Stop seviyemiz çalıştı, riskimiz planlandığı gibi sınırlı kaldı. Disiplinli risk yönetimi, uzun vadeli başarının temelidir.</span></div>`:""}
     <div class="sig-actions">
       <button class="btn" data-chart="${esc(tvSym(s.sym))}">📈 Grafik</button>
@@ -1420,7 +1511,7 @@ function renderSigs(){
   const act = SIGS.filter(s => ["aktif","bekle","karda"].includes(s.stKey));
   if (sigFirst && SIGS.length){ sigFirst = false; if (!act.length){ sigFilter = "kapali"; document.querySelectorAll("[data-f]").forEach(x => x.classList.toggle("on", x.dataset.f==="kapali")); } }
   ["#cdHome","#cdIslem"].forEach(s => { const b=$(s); if (b) b.dataset.done = ""; });
-  renderCountdown(); renderKutlama(); if (!cdTimer) cdTimer = setInterval(() => { renderCountdown(); renderKutlama(); }, 1000);
+  renderCountdown(); renderKutlama(); renderBv(); if (!cdTimer) cdTimer = setInterval(() => { renderCountdown(); renderKutlama(); }, 1000);
   const list = sigFilter==="aktif" ? act : sigFilter==="kapali" ? SIGS.filter(s=>!["aktif","bekle","karda"].includes(s.stKey)) : SIGS;
   $("#sigList").innerHTML = list.length ? list.map(sigCard).join("") :
     `<div class="card empty" style="grid-column:1/-1"><div style="font-size:34px">🎯</div><h3 style="margin:8px 0 4px">${sigFilter==="aktif"?"Şu an aktif işlem önerisi yok":"Henüz kayıt yok"}</h3><div>Yeni öneriler paylaşıldığında burada görünür. Sayfa otomatik yenilenir.</div></div>`;
