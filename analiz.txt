@@ -63,3 +63,35 @@ Mevcut fiyat hareketinde de aynı yapının yeniden oluşabileceğini değerlend
 💰 YATIRIM POTANSİYELİ — İşlem büyüklüğü: 10 LOT · Bağlanan teminat: 5.000 USD · Potansiyel kazanç: 21.000 USD · Teminata göre potansiyel getiri: %420
 
 Beş kez gözlemlenen fiyat döngüsünün altıncı kez tekrarlanması beklentisiyle bu bölgeyi yakından takip ediyoruz.
+
+---
+TARİH: 24.11.2026
+UZMAN: Oktay Demirhan
+UNVAN: VIP Uzman
+SEMBOL: NASDAQ
+GÖRÜŞ: Düşüş
+DESTEK: 24.963
+DİRENÇ: 26.800 – 27.200
+HEDEF: 24.963
+GÖRSEL: analiz/nasdaq-2411-dusus.jpg
+BAŞLIK: NASDAQ'daki sonu gelmeyen düşüş!
+METİN:
+6 Ekim tarihinde 31.360 puanla tarihî zirvesini gören NASDAQ, ardından gelen sert satışlarla önemli ölçüde değer kaybetti. Başlangıçta olağan bir kâr realizasyonu olarak değerlendirilebilecek bu düşüş, zaman içerisinde farklı ekonomik ve jeopolitik gelişmelerin etkisiyle derinleşti.
+
+Peki NASDAQ'ı bu kadar sert düşüren ne oldu?
+
+Öncelikle uzun süre kesintisiz yükseliş kaydeden teknoloji endeksinde kâr realizasyonu kaçınılmaz hâle gelmişti. Ancak satış baskısı bununla sınırlı kalmadı. Savaş kaynaklı belirsizlikler, faiz politikaları, seçim gündemi ve küresel ekonomik gelişmeler düşüşü hızlandıran başlıca etkenler oldu.
+
+Bunun yanında artan enerji maliyetleri ve hammadde fiyatları, ABD sanayisi üzerindeki baskıyı artırdı. Özellikle teknoloji üretiminde önemli yere sahip olan gümüşün ve enerji maliyetlerinin yükselmesi, şirketlerin maliyet yapısını olumsuz etkiledi. İstihdam verilerindeki belirsizlikler ve para politikasına ilişkin beklentiler de piyasadaki satış baskısını destekledi.
+
+Peki bundan sonra NASDAQ'ı nerede görebiliriz?
+
+Grafikteki teknik görünüm, düşüşün henüz tamamlanmadığına ve 24.963 seviyesine kadar geri çekilme ihtimalinin bulunduğuna işaret ediyor. Bu seviye, takip ettiğimiz talep bölgesinin üst sınırını oluşturuyor.
+
+Beklentimiz, NASDAQ'ın bu bölgeye ulaşmasının ardından güçlü bir alım hacmiyle karşılaşması. Böyle bir senaryoda fiyatın yeniden 26.800-27.200 bandına yükselerek denge arayışına girmesini bekliyoruz. Ancak bu toparlanmanın kalıcı olabilmesi için söz konusu bölgede yeterli işlem hacminin oluşması gerekiyor.
+
+Önümüzdeki FED faiz kararı da bu süreçte kritik bir katalizör olabilir. Beklentimiz, karar öncesinde veya sonrasında satış baskısının yeniden güçlenmesi ve NASDAQ'ın 24.963 seviyesindeki talep bölgesini test etmesi yönünde.
+
+Bugünkü fiyat seviyelerinden hesaplandığında bu senaryo, önemli bir aşağı yönlü hareket potansiyeli barındırıyor. Söz konusu hareketin tek yönlü kazanç potansiyeli kadar, fiyatın talep bölgesinden tepki vermesiyle oluşabilecek ikinci yönlü fırsatlar da toplam işlem stratejisinin önemli bir parçasını oluşturuyor.
+
+Özetle: NASDAQ'da henüz düşüşün sona erdiğini söylemek için yeterli teknik teyit bulunmuyor. Öncelikli beklentimiz 24.963 seviyesinin test edilmesi, ardından bu bölgeden gelecek hacim ve fiyat tepkisinin izlenmesi. Asıl önemli olan ise düşüşün nerede duracağı kadar, bu bölgeden nasıl bir toparlanma geleceği.
