@@ -280,7 +280,8 @@ section.lockd > :not(.sec-head):not(.lock-ov){filter:blur(7px) saturate(.75);poi
 .hs-opt{text-align:left;padding:18px 16px;border-radius:16px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);cursor:pointer;color:inherit;font:inherit;display:flex;flex-direction:column;gap:6px}
 .hs-opt:hover{border-color:var(--gold)}
 .hs-opt.v{border-color:rgba(252,211,77,.6);background:linear-gradient(160deg,rgba(252,211,77,.16),rgba(6,16,28,.4))}
-.hs-opt b{font-size:17px}.hs-opt.v b{color:#fde68a}
+.hs-opt b{font-size:17px}
+.hs-lim{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.5px;color:#fcd34d;background:rgba(252,211,77,.12);border-radius:20px;padding:3px 10px;align-self:flex-start}.hs-opt.v b{color:#fde68a}
 .hs-opt span{font-size:12.5px;color:var(--mut);line-height:1.5}
 .hs-opt i{font-style:normal;margin-top:6px;font-weight:700;color:var(--gold2);font-size:13px}.hs-opt.v i{color:#fcd34d}
 @media (max-width:560px){.hs-grid{grid-template-columns:1fr}}
@@ -530,9 +531,10 @@ body:not(.locked) #bvFab{display:inline-flex}
     <div class="t2" style="margin:0 0 4px">🔓 HESABINI AÇ, VIP'LERE KATIL</div>
     <p class="muted" style="margin:0">Hesap türünü seçin; talebiniz doğrudan kişisel uzmanınıza WhatsApp'tan iletilsin.</p>
     <div class="hs-grid">
-      <button class="hs-opt v" data-hs="VIP hesap"><b>👑 VIP Hesap</b><span>Aktif VIP işlemlerin yön ve seviyeleri, VIP proje başvuruları, VIP Robot ve kişisel uzmanınızla birebir takip.</span><i>VIP hesap aç →</i></button>
-      <button class="hs-opt" data-hs="Standart hesap"><b>Standart Hesap</b><span>Hemen işlem yapmaya başlayın; hazır olduğunuzda dilediğiniz zaman VIP'e geçin.</span><i>Standart hesap aç →</i></button>
+      <button class="hs-opt v" data-hs="VIP hesap (5.000 USD ve üzeri)"><b>👑 VIP Hesap</b><em class="hs-lim">5.000 USD ve üzeri</em><span>Aktif VIP işlemlerin yön ve seviyeleri, VIP proje başvuruları, VIP Robot ve kişisel uzmanınızla birebir takip.</span><i>VIP hesap aç →</i></button>
+      <button class="hs-opt" data-hs="Standart hesap (5.000 USD altı)"><b>Standart Hesap</b><em class="hs-lim">5.000 USD altı tüm hesaplar</em><span>Hemen işlem yapmaya başlayın; hazır olduğunuzda dilediğiniz zaman VIP'e geçin.</span><i>Standart hesap aç →</i></button>
     </div>
+    <button type="button" class="btn" id="hsPkg" style="width:100%;box-sizing:border-box;margin-top:4px">👑 VIP paketleri incele →</button>
     <button type="button" class="logout" id="hsCancel" style="margin-top:8px">Vazgeç</button>
   </div>
 </div>
@@ -2102,6 +2104,7 @@ document.querySelectorAll("#hsModal [data-hs]").forEach(b => b.onclick = () => {
   $("#hsModal").classList.remove("on");
 });
 $("#hsCancel").onclick = () => $("#hsModal").classList.remove("on");
+$("#hsPkg").onclick = () => { $("#hsModal").classList.remove("on"); show("pkg"); };
 $("#hsModal").addEventListener("click", e => { if (e.target.id==="hsModal") $("#hsModal").classList.remove("on"); });
 
 /* Satış Merkezi */
