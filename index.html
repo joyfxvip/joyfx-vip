@@ -114,6 +114,35 @@ label{font-size:12px;color:var(--mut);display:block;margin:10px 0 5px;letter-spa
 .an-item:last-child{border:none}
 .an-item .t{font-weight:600}.an-item .m{font-size:12px;color:var(--mut)}
 .an-empty{text-align:center;padding:30px;color:var(--mut)}
+.ctb{position:relative;overflow:hidden;margin-bottom:18px;border-radius:22px;padding:2px;background:linear-gradient(120deg,#22c55e,#2bb3d6,#fcd34d,#22c55e);background-size:300% 100%;animation:hotflow 5s linear infinite;box-shadow:0 18px 50px rgba(34,197,94,.18)}
+.ctb-in{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:center;padding:26px 28px;border-radius:20px;background:radial-gradient(520px 220px at 0% 0%,rgba(34,197,94,.20),transparent 70%),radial-gradient(420px 220px at 100% 100%,rgba(43,179,214,.18),transparent 70%),linear-gradient(135deg,#04140c,#061220 70%)}
+.ctb-live{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;letter-spacing:2.5px;color:#86efac;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.45);padding:5px 12px;border-radius:30px}
+.ctb-live i{width:9px;height:9px;border-radius:50%;background:#22c55e;animation:anlive 1.4s infinite}
+.ctb h2{margin:12px 0 4px;font-size:40px;line-height:1.05;font-weight:900;letter-spacing:.5px;background:linear-gradient(90deg,#ffffff,#86efac,#fcd34d,#ffffff);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:kutsh 3.5s linear infinite}
+.ctb h2 small{display:block;font-size:15px;letter-spacing:4px;font-weight:800;color:#8fe3f5;-webkit-text-fill-color:#8fe3f5;margin-bottom:4px}
+.ctb p{color:#d1fae5;font-size:15px;line-height:1.6;margin:6px 0 14px;max-width:560px}
+.ctb-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.ctb-chips span{font-size:12.5px;padding:7px 12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:#e2f7ee}
+.ctb-chips b{color:#86efac}
+.ctb-go{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.ctb-btn{border:0;cursor:pointer;font:inherit;font-weight:900;font-size:17px;padding:16px 26px;border-radius:16px;color:#032312;background:linear-gradient(90deg,#4ade80,#22c55e);box-shadow:0 10px 32px rgba(34,197,94,.45);animation:bvpulse 2s infinite;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.ctb-steps{display:flex;flex-direction:column;gap:10px}
+.ctb-step{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.ctb-step b{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:15px;color:#032312;background:linear-gradient(135deg,#86efac,#22c55e)}
+.ctb-step span{font-size:13.5px;line-height:1.4;color:#e2f7ee}
+.ctb-step span em{display:block;font-style:normal;font-size:12px;color:#9fd5c0}
+.ctb-term{grid-column:1/-1;border-radius:14px;overflow:hidden;border:1px solid rgba(34,197,94,.45);background:#0c0c0c;box-shadow:0 12px 36px rgba(0,0,0,.45),0 0 0 4px rgba(34,197,94,.07)}
+.ctb-term-h{display:flex;align-items:center;gap:7px;padding:9px 13px;background:linear-gradient(90deg,#10241a,#0e1a24);border-bottom:1px solid rgba(34,197,94,.3);font-size:12px;font-weight:700;color:#bbf7d0;letter-spacing:.5px}
+.ctb-term-h i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.ctb-term-h i:nth-child(1){background:#ef4444}.ctb-term-h i:nth-child(2){background:#f59e0b}.ctb-term-h i:nth-child(3){background:#22c55e}
+.ctb-term-h span{margin-left:6px}.ctb-term-h em{margin-left:auto;font-style:normal;color:#86efac;display:inline-flex;align-items:center;gap:6px}
+.ctb-term-h em:before{content:"";width:8px;height:8px;border-radius:50%;background:#22c55e;animation:anlive 1.4s infinite}
+.ctb-term a{display:block;overflow-x:auto}
+.ctb-term img{display:block;width:100%;min-width:760px;height:auto}
+.ctb-bots{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;justify-content:center}
+.ctb-bots i{font-style:normal;font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 9px;border-radius:20px;background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.4)}
+@media (max-width:860px){.ctb-in{grid-template-columns:1fr;padding:20px}.ctb h2{font-size:30px}.ctb-btn{width:100%;justify-content:center}}
+@media (prefers-reduced-motion:reduce){.ctb,.ctb h2,.ctb-btn{animation:none}}
 .kut{position:relative;overflow:hidden;margin-bottom:18px;border-radius:20px;padding:2px;background:linear-gradient(120deg,#fcd34d,#16a34a,#2bb3d6,#fcd34d);background-size:300% 100%;animation:hotflow 6s linear infinite}
 .kut-in{position:relative;z-index:1;display:flex;gap:22px;align-items:center;padding:24px 26px;border-radius:18px;background:radial-gradient(600px 200px at 10% 0%,rgba(252,211,77,.22),transparent 70%),linear-gradient(135deg,#1a1405,#06101c 65%)}
 .kut-cup{font-size:64px;flex:none;filter:drop-shadow(0 6px 18px rgba(252,211,77,.5));animation:cupj 2.2s ease-in-out infinite}
@@ -610,6 +639,8 @@ body:not(.locked) #bvFab{display:inline-flex}
     <!-- ============ ANA SAYFA ============ -->
     <section id="s-home">
       <div class="mcard" id="memberCard" style="display:none"></div>
+      <!-- COPY TRADE DUYURUSU (kapatmak için CONFIG.copyTrade.aktif = false) -->
+      <div id="ctHome"></div>
       <div id="kutHome"></div>
       <div id="cdHome"></div>
       <div id="bvHome"></div>
@@ -1018,6 +1049,8 @@ const CONFIG = {
     adayGun: 5,                 // satışçının ürettiği aday kodlarının geçerlilik süresi (gün)
     anahtar: "39614a7d3380818a1b457785"
   },
+  // ANA SAYFA COPY TRADE DUYURUSU
+  copyTrade: { aktif: true, bot: "DESTROYER H4 (DR4)", sembol: 93, gorsel: "copytrade-bot.png", gorselNot: "Canlı bot ekranı · 25.11.2026" },
   hatirlaGun: 7,   // "beni hatırla" seçilirse kaç gün tekrar kod sorulmasın
 
   duyuru: {
@@ -1516,6 +1549,29 @@ $("#bvForm").addEventListener("submit", e => {
 });
 $("#bvCancel").onclick = $("#bvClose").onclick = () => $("#bvModal").classList.remove("on");
 $("#bvModal").addEventListener("click", e => { if (e.target.id==="bvModal") $("#bvModal").classList.remove("on"); });
+function renderCopyTrade(){
+  const C = CONFIG.copyTrade || {}, el = $("#ctHome"); if (!el) return;
+  if (!C.aktif){ el.innerHTML = ""; return; }
+  const aday = adayView();
+  const go = aday ? `<button class="ctb-btn" onclick="openHesap('VIP hesap')">🤖 Hesabını aç, Copy Trade'e katıl</button>`
+    : `<a class="ctb-btn" target="_blank" rel="noopener" href="${waLink(CONFIG.marka+" Copy Trade'e katılmak istiyorum. MT5 hesabımı botlara bağlayalım.")}">🤖 Copy Trade'e hemen katıl</a>`;
+  el.innerHTML = `<div class="ctb"><div class="ctb-in">
+    <div>
+      <span class="ctb-live"><i></i>CANLI · ŞU AN ÇALIŞIYOR</span>
+      <h2><small>COPY TRADE</small>TÜM BOTLAR AKTİF!</h2>
+      <p>Robotlarımız piyasayı 7/24 tarıyor. MT5 hesabınızı bağlayın, botların işlemleri hesabınıza <b>otomatik olarak kopyalansın</b>.</p>
+      <div class="ctb-chips"><span>🤖 <b>${esc(C.bot||"VIP Robot")}</b> devrede</span><span>📊 <b>${C.sembol||93}</b> sembol taranıyor</span><span>🛡️ Spread/ATR filtresi + lot kontrolü</span></div>
+      <div class="ctb-go">${go}<button class="btn" onclick="show('robot')">Nasıl çalışır?</button></div>
+    </div>
+    <div class="ctb-steps">
+      <div class="ctb-step"><b>1</b><span>Uzmanınıza yazın<em>Katılım talebiniz hemen iletilir</em></span></div>
+      <div class="ctb-step"><b>2</b><span>MT5 hesabınızı bağlayın<em>Tek seferlik kurulum, uzmanınızla birlikte</em></span></div>
+      <div class="ctb-step"><b>3</b><span>İşlemler otomatik kopyalansın<em>Botlar çalışır, siz takip edersiniz</em></span></div>
+      <div class="ctb-bots"><i>● FOREX</i><i>● ENDEKS</i><i>● EMTİA</i><i>● HİSSE</i></div>
+    </div>
+    ${C.gorsel ? `<div class="ctb-term"><div class="ctb-term-h"><i></i><i></i><i></i><span>🤖 ${esc(C.bot||"VIP Robot")} — ${esc(C.gorselNot||"Canlı bot ekranı")}</span><em>ÇALIŞIYOR</em></div><a href="${esc(C.gorsel)}" target="_blank" rel="noopener"><img src="${esc(C.gorsel)}" alt="Copy Trade bot ekranı" loading="lazy"></a></div>` : ""}
+  </div></div>`;
+}
 function renderKutlama(){
   const on = KUT && Date.now() < KUT.end;
   const html = on ? `<div class="kut"><div class="kut-in"><div class="kut-cup">🏆</div><div class="kut-tx"><span class="kut-tag">VIP BAŞARI</span><h2>${esc(KUT.baslik)}</h2><p>${esc(KUT.metin)}</p>
@@ -1650,7 +1706,7 @@ function renderSigs(){
   const act = SIGS.filter(s => ["aktif","bekle","karda"].includes(s.stKey));
   if (sigFirst && SIGS.length){ sigFirst = false; if (!act.length){ sigFilter = "kapali"; document.querySelectorAll("[data-f]").forEach(x => x.classList.toggle("on", x.dataset.f==="kapali")); } }
   ["#cdHome","#cdIslem"].forEach(s => { const b=$(s); if (b) b.dataset.done = ""; });
-  renderCountdown(); renderKutlama(); renderBv(); if (!cdTimer) cdTimer = setInterval(() => { renderCountdown(); renderKutlama(); }, 1000);
+  renderCountdown(); renderKutlama(); renderBv(); renderCopyTrade(); if (!cdTimer) cdTimer = setInterval(() => { renderCountdown(); renderKutlama(); }, 1000);
   const list = sigFilter==="aktif" ? act : sigFilter==="kapali" ? SIGS.filter(s=>!["aktif","bekle","karda"].includes(s.stKey)) : SIGS;
   $("#sigList").innerHTML = list.length ? list.map(sigCard).join("") :
     `<div class="card empty" style="grid-column:1/-1"><div style="font-size:34px">🎯</div><h3 style="margin:8px 0 4px">${sigFilter==="aktif"?"Şu an aktif işlem önerisi yok":"Henüz kayıt yok"}</h3><div>Yeni öneriler paylaşıldığında burada görünür. Sayfa otomatik yenilenir.</div></div>`;
@@ -2077,7 +2133,7 @@ async function adayKodCoz(v){
 }
 function setAdayGoz(on){
   try{ sessionStorage.setItem("joy_adaygoz", on?"1":"0"); }catch(e){}
-  buildNav(); renderSigs(); renderTrial(true); renderYat(); adayUi();
+  buildNav(); renderSigs(); renderTrial(true); renderYat(); adayUi(); renderCopyTrade();
   const cur = (document.querySelector("section.on")||{}).id || "s-home"; applyLocks(cur.replace("s-",""));
   if ($("#smGoz")) { $("#smGoz").textContent = on ? "↩ VIP görünüme dön" : "👁 Aday gözüyle bak"; $("#smGoz").classList.toggle("goz-on", on); }
 }
