@@ -504,6 +504,85 @@ body:not(.locked) #bvFab{display:inline-flex}
   .g2,.g3,.g4{grid-template-columns:1fr}
   .chartbox{height:420px}
 }
+/* ===== MÜKEMMEL 3'LÜ GÜN ===== */
+@keyframes u3live{0%{box-shadow:0 0 0 0 rgba(252,211,77,.7)}70%{box-shadow:0 0 0 10px rgba(252,211,77,0)}100%{box-shadow:0 0 0 0 rgba(252,211,77,0)}}
+@keyframes u3mq{to{transform:translateX(-50%)}}
+@keyframes u3float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes u3glow{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes u3blink{50%{opacity:.35}}
+/* üst şerit (tüm sayfalarda) */
+.u3s{position:relative;overflow:hidden;margin:0 0 14px;border-radius:14px;background:linear-gradient(90deg,#1a1405,#2a1f04 30%,#06202b 70%,#1a1405);border:1px solid rgba(252,211,77,.45);cursor:pointer;display:flex;align-items:center}
+.u3s-b{flex:none;z-index:2;display:flex;align-items:center;gap:8px;padding:9px 14px;font-weight:900;font-size:12.5px;letter-spacing:1.5px;color:#1a1405;background:linear-gradient(90deg,#fde68a,#fcd34d)}
+.u3s-b i{width:8px;height:8px;border-radius:50%;background:#dc2626;animation:u3blink 1s infinite}
+.u3s-t{overflow:hidden;flex:1;white-space:nowrap}
+.u3s-t div{display:inline-block;padding-left:0;animation:u3mq 28s linear infinite;font-size:13.5px;font-weight:700;color:#fef3c7}
+.u3s-t span{margin:0 22px}.u3s-t b{color:#fcd34d}
+.u3s-cd{flex:none;z-index:2;padding:9px 14px;font-weight:900;font-size:13px;color:#8fe3f5;background:#06121c;border-left:1px solid rgba(143,227,245,.25);font-variant-numeric:tabular-nums}
+/* ana bant */
+.u3{position:relative;overflow:hidden;margin-bottom:18px;border-radius:26px;padding:2px;background:linear-gradient(120deg,#fcd34d,#f59e0b,#2bb3d6,#a6ecfa,#fcd34d);background-size:300% 100%;animation:hotflow 4s linear infinite;box-shadow:0 24px 70px rgba(252,211,77,.22)}
+.u3-in{position:relative;z-index:1;padding:28px 30px 24px;border-radius:24px;background:radial-gradient(700px 320px at 0% 0%,rgba(252,211,77,.22),transparent 70%),radial-gradient(600px 300px at 100% 0%,rgba(43,179,214,.22),transparent 70%),linear-gradient(160deg,#0d1626,#060c17 75%);overflow:hidden}
+.u3-in:before{content:"3";position:absolute;right:-30px;top:-80px;font:900 360px/1 Inter,sans-serif;color:rgba(252,211,77,.05);pointer-events:none}
+.u3-hero{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:start}
+.u3-tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:900;letter-spacing:2.5px;color:#1a1405;background:linear-gradient(90deg,#fde68a,#fcd34d);padding:6px 14px;border-radius:30px}
+.u3-tag i{width:9px;height:9px;border-radius:50%;background:#dc2626;animation:u3blink 1s infinite}
+.u3 h2{font-family:Inter,sans-serif;font-size:56px;line-height:.98;font-weight:900;letter-spacing:-1px;margin:14px 0 8px;background:linear-gradient(90deg,#ffffff,#fde68a,#fcd34d,#8fe3f5,#ffffff);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:kutsh 3s linear infinite}
+.u3 h2 small{display:block;font-size:15px;letter-spacing:5px;font-weight:800;color:#8fe3f5;-webkit-text-fill-color:#8fe3f5;margin-bottom:8px}
+.u3-punch{font-size:22px;font-weight:800;color:#fff;letter-spacing:-.2px}
+.u3-punch em{font-style:normal;color:#fcd34d}
+.u3-sub{color:#cbd5e1;font-size:15px;margin:8px 0 0;max-width:680px}
+.u3-cd{min-width:230px;text-align:center;border-radius:18px;padding:14px 16px;background:rgba(0,0,0,.35);border:1px solid rgba(143,227,245,.35)}
+.u3-cd small{display:block;font-size:11px;font-weight:800;letter-spacing:2px;color:#8fe3f5}
+.u3-cd b{display:block;font:900 38px/1.1 Inter,sans-serif;color:#fff;font-variant-numeric:tabular-nums;margin:6px 0 2px;text-shadow:0 0 24px rgba(143,227,245,.5)}
+.u3-cd span{font-size:11.5px;color:#90a0b4}
+.u3-cd.open b{color:#4ade80;font-size:24px;text-shadow:0 0 24px rgba(74,222,128,.5)}
+.u3-proof{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:18px 0 16px;padding:12px 14px;border-radius:14px;background:rgba(63,191,127,.08);border:1px solid rgba(63,191,127,.35)}
+.u3-score{font-weight:900;font-size:14px;color:#fff;margin-right:6px}
+.u3-score b{color:#4ade80;font-size:20px}
+.u3-proof .w{font-size:12.5px;font-weight:800;padding:5px 10px;border-radius:20px;background:rgba(74,222,128,.14);color:#bbf7d0;border:1px solid rgba(74,222,128,.35)}
+.u3-proof .w.star{background:linear-gradient(90deg,rgba(252,211,77,.25),rgba(252,211,77,.12));color:#fde68a;border-color:rgba(252,211,77,.6)}
+.u3-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:14px}
+.u3-card{position:relative;border-radius:20px;padding:20px 18px 16px;background:linear-gradient(170deg,rgba(43,179,214,.10),rgba(255,255,255,.02) 55%);border:1px solid rgba(143,227,245,.28);display:flex;flex-direction:column;gap:9px;overflow:hidden;transition:transform .2s}
+.u3-card:hover{transform:translateY(-3px)}
+.u3-card.star{background:linear-gradient(165deg,rgba(252,211,77,.22),rgba(245,158,11,.06) 50%,rgba(255,255,255,.02));border:2px solid #fcd34d;box-shadow:0 0 50px rgba(252,211,77,.22),inset 0 0 40px rgba(252,211,77,.06)}
+.u3-card .no{position:absolute;right:14px;top:4px;font:900 78px/1 Inter,sans-serif;color:rgba(255,255,255,.06)}
+.u3-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.u3-lab{font-size:10.5px;font-weight:900;letter-spacing:1.6px;padding:5px 10px;border-radius:20px;color:#032330;background:linear-gradient(90deg,#a6ecfa,#2bb3d6)}
+.u3-card.star .u3-lab{color:#1a1405;background:linear-gradient(90deg,#fde68a,#fcd34d)}
+.u3-st{font-size:11px;font-weight:800;color:#fcd34d;display:flex;align-items:center;gap:6px}
+.u3-st i{width:7px;height:7px;border-radius:50%;background:#fcd34d;animation:u3live 1.4s infinite}
+.u3-ic{font-size:40px;line-height:1;animation:u3float 3s ease-in-out infinite}
+.u3-card h4{font:900 22px/1.15 Inter,sans-serif;color:#fff}
+.u3-card p{font-size:13.2px;color:#b6c2d1;line-height:1.45}
+.u3-min{border-radius:12px;padding:10px 12px;background:rgba(0,0,0,.35);border:1px dashed rgba(252,211,77,.55)}
+.u3-min span{display:block;font-size:10.5px;font-weight:900;letter-spacing:1.8px;color:#fde68a}
+.u3-min b{font:900 30px/1.15 Inter,sans-serif;color:#fff}
+.u3-kanit{font-size:12.5px;font-weight:700;color:#bbf7d0;background:rgba(74,222,128,.08);border-left:3px solid #4ade80;padding:7px 10px;border-radius:0 10px 10px 0}
+.u3-lock{font-size:12px;color:#8fe3f5;font-weight:600}
+.u3-btn{margin-top:auto;border:0;cursor:pointer;font:inherit;font-weight:900;font-size:15px;padding:14px 16px;border-radius:14px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;color:#032330;background:linear-gradient(90deg,#a6ecfa,#2bb3d6);box-shadow:0 8px 24px rgba(43,179,214,.35)}
+.u3-card.star .u3-btn{color:#1a1405;font-size:16px;background:linear-gradient(90deg,#fff3c4,#fcd34d,#f59e0b);box-shadow:0 12px 34px rgba(252,211,77,.5);animation:bvpulse 1.8s infinite}
+.u3-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:18px}
+.u3-foot p{font-size:12px;color:#7f8fa3;max-width:640px}
+.u3-all{border:0;cursor:pointer;font:inherit;font-weight:900;font-size:17px;padding:16px 26px;border-radius:16px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;color:#1a1405;background:linear-gradient(90deg,#fff3c4,#fcd34d,#f59e0b);box-shadow:0 14px 40px rgba(252,211,77,.45);animation:bvpulse 2s infinite}
+/* açılış ekranı */
+.u3m{position:fixed;inset:0;z-index:900;display:none;align-items:center;justify-content:center;padding:16px;background:radial-gradient(circle at 50% 30%,rgba(252,211,77,.18),rgba(3,6,12,.92) 60%);backdrop-filter:blur(6px)}
+.u3m.on{display:flex}
+.u3m-box{position:relative;width:min(560px,100%);border-radius:26px;padding:2px;background:linear-gradient(120deg,#fcd34d,#f59e0b,#2bb3d6,#fcd34d);background-size:300% 100%;animation:hotflow 4s linear infinite;box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 80px rgba(252,211,77,.25)}
+.u3m-in{border-radius:24px;padding:28px 26px 22px;text-align:center;background:radial-gradient(500px 260px at 50% 0%,rgba(252,211,77,.22),transparent 70%),linear-gradient(170deg,#0d1626,#060c17)}
+.u3m-x{position:absolute;right:14px;top:12px;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.4);color:#fff;font-size:18px;cursor:pointer;z-index:2}
+.u3m-num{width:104px;height:104px;margin:0 auto;border-radius:30px;display:flex;align-items:center;justify-content:center;font:900 72px/1 Inter,sans-serif;color:#1a1405;background:linear-gradient(145deg,#fff3c4,#fcd34d 45%,#d99a0b);box-shadow:0 0 0 8px rgba(252,211,77,.12),0 18px 50px rgba(252,211,77,.45);animation:u3float 3s ease-in-out infinite}
+.u3m h3{font:900 34px/1.05 Inter,sans-serif;margin:18px 0 6px;background:linear-gradient(90deg,#fff,#fde68a,#fff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:kutsh 3s linear infinite}
+.u3m-k{display:inline-block;font-size:12px;font-weight:900;letter-spacing:3px;color:#8fe3f5}
+.u3m ul{list-style:none;margin:16px 0;display:grid;gap:8px;text-align:left}
+.u3m li{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(143,227,245,.22);font-weight:800;color:#fff}
+.u3m li.star{border-color:#fcd34d;background:rgba(252,211,77,.1)}
+.u3m li em{margin-left:auto;font-style:normal;font-size:11.5px;color:#fde68a;font-weight:900;white-space:nowrap}
+.u3m li span{font-size:24px}
+.u3m-cd{font-size:13px;color:#cbd5e1;margin-bottom:14px}.u3m-cd b{color:#fff;font-variant-numeric:tabular-nums}
+.u3m-go{display:flex;gap:10px;flex-wrap:wrap}.u3m-go>*{flex:1}
+.u3m .u3-all{justify-content:center}
+.u3m-see{border:1px solid rgba(143,227,245,.4);background:transparent;color:#8fe3f5;border-radius:16px;font:inherit;font-weight:800;cursor:pointer;padding:14px}
+@media (max-width:860px){.u3-in{padding:20px 16px}.u3-hero{grid-template-columns:1fr}.u3-cd{min-width:0}.u3-grid{grid-template-columns:1fr}.u3 h2{font-size:38px}.u3-punch{font-size:18px}.u3-all{width:100%;justify-content:center}.u3s-cd{display:none}}
+@media (prefers-reduced-motion:reduce){.u3,.u3 h2,.u3-btn,.u3-all,.u3-ic,.u3m-num,.u3s-t div{animation:none}}
 </style>
 </head>
 <body class="locked">
@@ -635,10 +714,13 @@ body:not(.locked) #bvFab{display:inline-flex}
 
     <div class="trial-bar" id="trialBar" style="display:none"></div>
     <div class="ticker" id="ticker"></div>
+    <div id="u3Strip"></div>
 
     <!-- ============ ANA SAYFA ============ -->
     <section id="s-home">
       <div class="mcard" id="memberCard" style="display:none"></div>
+      <!-- MÜKEMMEL 3'LÜ GÜN (kapatmak için CONFIG.ucluGun.aktif = false) -->
+      <div id="u3Home"></div>
       <!-- COPY TRADE DUYURUSU (kapatmak için CONFIG.copyTrade.aktif = false) -->
       <div id="ctHome"></div>
       <div id="kutHome"></div>
@@ -666,6 +748,7 @@ body:not(.locked) #bvFab{display:inline-flex}
     <!-- ============ GRAFİK ============ -->
     <!-- ============ VIP İŞLEMLER ============ -->
     <section id="s-islem">
+      <div id="u3Islem"></div>
       <div id="kutIslem"></div>
       <div id="cdIslem"></div>
       <div id="bvIslem"></div>
@@ -1048,6 +1131,25 @@ const CONFIG = {
     ],
     adayGun: 5,                 // satışçının ürettiği aday kodlarının geçerlilik süresi (gün)
     anahtar: "39614a7d3380818a1b457785"
+  },
+  // "MÜKEMMEL 3'LÜ GÜN" — ana sayfa bandı + üst şerit + açılış ekranı (kapatmak için aktif: false)
+  ucluGun: {
+    aktif: true,
+    bitis: "28.11.2026 00:00",              // bu saatten sonra kendiliğinden kalkar (İstanbul)
+    geriSayim: "27.11.2026 17:30",          // sayaç hedefi (İstanbul) — ABD seansı açılışı
+    geriSayimEtiket: "ABD SEANSI AÇILIŞINA",
+    tarih: "27 KASIM",
+    etiket: "BUGÜN · VIP MASADA",
+    ust: "JOY FX VIP",
+    baslik: "MÜKEMMEL 3'LÜ GÜN",
+    vurgu: "1 ABD hisse projesi. 2 toplu giriş. <em>Tek gün.</em>",
+    metin: "VIP masamız bugün üç ayrı fırsatı aynı gün açıyor. Yerini şimdi uzmanına bildiren yatırımcılar, giriş anında ilk bilgilendirilir.",
+    alt: "Semboller ve seviyeler giriş anında VIP İşlemler bölümünde ve kişisel uzmanınız üzerinden paylaşılır. Geçmiş sonuçlar gelecekteki sonuçların garantisi değildir; kaldıraçlı işlemler risk içerir.",
+    kalemler: [
+      { yildiz: true, etiket: "★ VIP PROJE", ikon: "🇺🇸", tur: "ABD Hisse VIP Projesi", aciklama: "Büyük portföylere özel ABD hisse projesi. Uzmanınız size özel giriş planı ve pozisyon yönetimiyle ilerler.", min: "200.000 USD", kanit: "Son ABD hisse toplu girişimiz NVDA hedefine ulaştı ✓", buton: "Projeye başvur" },
+      { etiket: "VIP TOPLU GİRİŞ", ikon: "📊", tur: "Endeks Toplu Giriş", aciklama: "Tüm VIP masası aynı anda, aynı seviyeden birlikte giriyor.", kanit: "Son endeks hedeflerimiz: NASDAQ 27.550 ✓ · IBEX 18.900 ✓", buton: "Yerimi ayırt" },
+      { etiket: "VIP TOPLU GİRİŞ", ikon: "🛢️", tur: "Emtia Toplu Giriş", aciklama: "Tüm VIP masası aynı anda, aynı seviyeden birlikte giriyor.", kanit: "Altında 20 lotta +240.000 USD 🏆 · NATGAS 4,22 ✓ · Gümüş 46,91 ✓", buton: "Yerimi ayırt" }
+    ]
   },
   // ANA SAYFA COPY TRADE DUYURUSU
   copyTrade: { aktif: true, bot: "DESTROYER H4 (DR4)", sembol: 93, gorsel: "copytrade-bot.png", gorselNot: "Canlı bot ekranı · 25.11.2026" },
@@ -1549,6 +1651,81 @@ $("#bvForm").addEventListener("submit", e => {
 });
 $("#bvCancel").onclick = $("#bvClose").onclick = () => $("#bvModal").classList.remove("on");
 $("#bvModal").addEventListener("click", e => { if (e.target.id==="bvModal") $("#bvModal").classList.remove("on"); });
+/* ===== MÜKEMMEL 3'LÜ GÜN (CONFIG.ucluGun) ===== */
+const U3KEY = "joy_u3_gor";
+function u3On(){ const U = CONFIG.ucluGun||{}; if (!U.aktif || !(U.kalemler||[]).length) return false;
+  const m = (U.bitis||"").match(/(\d{1,2})\.(\d{1,2})\.(\d{4})\s+(\d{1,2})[:.](\d{2})/);
+  return !m || Date.now() < Date.UTC(+m[3], +m[2]-1, +m[1], +m[4]-3, +m[5]); }
+function u3Hedef(){ const m = ((CONFIG.ucluGun||{}).geriSayim||"").match(/(\d{1,2})\.(\d{1,2})\.(\d{4})\s+(\d{1,2})[:.](\d{2})/);
+  return m ? Date.UTC(+m[3], +m[2]-1, +m[1], +m[4]-3, +m[5]) : 0; }
+function u3Sure(){ const h = u3Hedef(); if (!h) return null; const d = h - Date.now(); if (d <= 0) return "";
+  const s = Math.floor(d/1000), p = n => String(n).padStart(2,"0"); return `${p(Math.floor(s/3600))}:${p(Math.floor(s%3600/60))}:${p(s%60)}`; }
+function u3Msg(k){ const U = CONFIG.ucluGun;
+  return `Merhaba, ${CONFIG.marka} "${U.baslik}" kapsamında ${k.tur} işlemine katılmak istiyorum 🚀${k.min?`\n• Planladığım tutar: ${k.min} ve üzeri`:""}\nGiriş planımı hazırlar mısınız?`; }
+function u3AllMsg(){ const U = CONFIG.ucluGun;
+  return `Merhaba, ${CONFIG.marka} "${U.baslik}" işlemlerinin üçüne de katılmak istiyorum 🚀\n` + U.kalemler.map((k,i)=>`${i+1}) ${k.tur}${k.min?` (min. ${k.min})`:""}`).join("\n") + `\nGiriş planımı hazırlar mısınız?`; }
+function u3Btn(cls, txt, msg){ return adayView() ? `<button class="${cls}" onclick="openHesap('VIP hesap')">${txt}</button>`
+  : `<a class="${cls}" target="_blank" rel="noopener" href="${waLink(msg)}">${txt}</a>`; }
+function u3Kanit(){
+  // Bu ayın kapanan VIP işlemleri (islemler.txt'den canlı): hedef / stop sayısı + son hedefler
+  const ay = new Date(); const ayStr = `.${String(ay.getMonth()+1).padStart(2,"0")}.${ay.getFullYear()}`;
+  const buAy = SIGS.filter(s => (s.tarih||"").includes(ayStr));
+  const tp = buAy.filter(s => s.stKey==="tp"), st = buAy.filter(s => s.stKey==="stop");
+  const ayAd = ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"][ay.getMonth()];
+  const son = tp.slice().sort((a,b)=>b.i-a.i).slice(0,6);
+  return tp.length ? `<div class="u3-proof"><span class="u3-score">${ayAd} VIP masası: <b>${tp.length} hedef ✓</b> · ${st.length} stop</span>`
+    + son.map(s => `<span class="w ${/🏆/.test(s.note)?"star":""}">${/🏆/.test(s.note)?"🏆":"✓"} ${esc(s.sym)} TP</span>`).join("") + `</div>` : "";
+}
+function renderUclu(){
+  const U = CONFIG.ucluGun || {}, on = u3On();
+  let html = "", strip = "";
+  if (on){
+    const sure = u3Sure();
+    const cd = sure===null ? "" : `<div class="u3-cd ${sure===""?"open":""}" id="u3cd"><small>${esc(U.geriSayimEtiket||"ABD SEANSI AÇILIŞINA")}</small><b>${sure===""?"🔴 SEANS AÇIK":sure}</b><span>${sure===""?"Girişler VIP İşlemler'de paylaşılır":"İstanbul "+esc((U.geriSayim||"").split(" ")[1]||"")}</span></div>`;
+    html = `<div class="u3"><div class="u3-in">
+      <div class="u3-hero"><div>
+        <span class="u3-tag"><i></i>${esc(U.etiket||"BUGÜN · VIP MASADA")}</span>
+        <h2><small>${esc(U.ust||"JOY FX VIP")} · ${esc(U.tarih||"")}</small>${esc(U.baslik)}</h2>
+        <div class="u3-punch">${U.vurgu||""}</div>
+        <p class="u3-sub">${U.metin||""}</p>
+      </div>${cd}</div>
+      ${u3Kanit()}
+      <div class="u3-grid">${U.kalemler.map((k,i)=>`<div class="u3-card ${k.yildiz?"star":""}"><span class="no">${i+1}</span>
+        <div class="u3-row"><span class="u3-lab">${esc(k.etiket||"")}</span><span class="u3-st"><i></i>GİRİŞ BEKLENİYOR</span></div>
+        <div class="u3-ic">${k.ikon||""}</div><h4>${esc(k.tur)}</h4><p>${esc(k.aciklama||"")}</p>
+        ${k.min?`<div class="u3-min"><span>MİNİMUM KATILIM</span><b>${esc(k.min)}</b></div>`:""}
+        ${k.kanit?`<div class="u3-kanit">${esc(k.kanit)}</div>`:""}
+        <div class="u3-lock">🔒 Sembol ve seviyeler giriş anında açıklanır</div>
+        ${u3Btn("u3-btn", esc(k.buton||"Yerimi ayırt")+" →", u3Msg(k))}</div>`).join("")}</div>
+      <div class="u3-foot"><p>${esc(U.alt||"")}</p>${u3Btn("u3-all", "🚀 3'üne birden katıl", u3AllMsg())}</div>
+    </div></div>`;
+    const parca = U.kalemler.map(k => `<span>${k.ikon} <b>${esc(k.tur.toLocaleUpperCase("tr-TR"))}</b>${k.min?` · min. ${esc(k.min)}`:""}</span>`).join("");
+    strip = `<div class="u3s" onclick="show('home');setTimeout(()=>{const e=$('#u3Home'); if(e) e.scrollIntoView({behavior:'smooth'});},60)"><div class="u3s-b"><i></i>${esc(U.baslik)}</div>
+      <div class="u3s-t"><div>${parca}<span>🔥 <b>Yerini şimdi ayırt</b></span>${parca}<span>🔥 <b>Yerini şimdi ayırt</b></span></div></div>
+      ${sure===null?"":`<div class="u3s-cd" id="u3scd">${sure===""?"🔴 SEANS AÇIK":"⏱ "+sure}</div>`}</div>`;
+  }
+  [["#u3Home",html],["#u3Islem",html],["#u3Strip",strip]].forEach(([id,h]) => { const el = $(id); if (el && el.dataset.h !== h){ el.innerHTML = h; el.dataset.h = h; } });
+}
+function u3Tick(){ if (!u3On()) return; const s = u3Sure(); if (s===null) return;
+  const a = $("#u3cd b"), b = $("#u3scd"), c = $("#u3mcd");
+  if (s===""){ renderUclu(); return; }
+  if (a) a.textContent = s; if (b) b.textContent = "⏱ "+s; if (c) c.textContent = s; }
+function u3Acilis(){
+  // Günde bir kez, girişten sonra tam ekran duyuru
+  const U = CONFIG.ucluGun || {}; if (!u3On()) return;
+  const bugun = new Date().toDateString(); try{ if (localStorage.getItem(U3KEY) === bugun) return; }catch(_){}
+  let m = $("#u3m"); if (!m){ m = document.createElement("div"); m.id = "u3m"; m.className = "u3m"; document.body.appendChild(m); }
+  const sure = u3Sure();
+  m.innerHTML = `<div class="u3m-box"><button class="u3m-x" onclick="u3Kapat()">×</button><div class="u3m-in">
+    <div class="u3m-num">3</div><h3>${esc(U.baslik)}</h3><span class="u3m-k">BUGÜN · ${esc(U.ust||"JOY FX VIP")} MASASINDA</span>
+    <ul>${U.kalemler.map(k=>`<li class="${k.yildiz?"star":""}"><span>${k.ikon}</span>${esc(k.tur)}${k.min?`<em>min. ${esc(k.min)}</em>`:""}</li>`).join("")}</ul>
+    ${sure?`<div class="u3m-cd">${esc(U.geriSayimEtiket||"ABD seansı açılışına")}: <b id="u3mcd">${sure}</b></div>`:""}
+    <div class="u3m-go">${u3Btn("u3-all","🚀 Yerimi ayırt",u3AllMsg())}<button class="u3m-see" onclick="u3Kapat();show('home');setTimeout(()=>$('#u3Home').scrollIntoView({behavior:'smooth'}),60)">Detayları gör</button></div>
+  </div></div>`;
+  m.classList.add("on");
+  m.onclick = e => { if (e.target === m) u3Kapat(); };
+}
+function u3Kapat(){ const m = $("#u3m"); if (m) m.classList.remove("on"); try{ localStorage.setItem(U3KEY, new Date().toDateString()); }catch(_){} }
 function renderCopyTrade(){
   const C = CONFIG.copyTrade || {}, el = $("#ctHome"); if (!el) return;
   if (!C.aktif){ el.innerHTML = ""; return; }
@@ -1706,7 +1883,7 @@ function renderSigs(){
   const act = SIGS.filter(s => ["aktif","bekle","karda"].includes(s.stKey));
   if (sigFirst && SIGS.length){ sigFirst = false; if (!act.length){ sigFilter = "kapali"; document.querySelectorAll("[data-f]").forEach(x => x.classList.toggle("on", x.dataset.f==="kapali")); } }
   ["#cdHome","#cdIslem"].forEach(s => { const b=$(s); if (b) b.dataset.done = ""; });
-  renderCountdown(); renderKutlama(); renderBv(); renderCopyTrade(); if (!cdTimer) cdTimer = setInterval(() => { renderCountdown(); renderKutlama(); }, 1000);
+  renderCountdown(); renderKutlama(); renderBv(); renderCopyTrade(); renderUclu(); if (!cdTimer) cdTimer = setInterval(() => { renderCountdown(); renderKutlama(); u3Tick(); }, 1000);
   const list = sigFilter==="aktif" ? act : sigFilter==="kapali" ? SIGS.filter(s=>!["aktif","bekle","karda"].includes(s.stKey)) : SIGS;
   $("#sigList").innerHTML = list.length ? list.map(sigCard).join("") :
     `<div class="card empty" style="grid-column:1/-1"><div style="font-size:34px">🎯</div><h3 style="margin:8px 0 4px">${sigFilter==="aktif"?"Şu an aktif işlem önerisi yok":"Henüz kayıt yok"}</h3><div>Yeni öneriler paylaşıldığında burada görünür. Sayfa otomatik yenilenir.</div></div>`;
@@ -1778,6 +1955,7 @@ function boot(){
   tvWidget("ticker","ticker-tape",{symbols:CONFIG.semboller.map(s=>({proName:s.tv,title:s.ad})),showSymbolLogo:true,displayMode:"adaptive"});
   greet(); tickClock(); setInterval(tickClock, 30000);
   initSigs(); loadSigs(); setInterval(loadSigs, 60000);
+  renderUclu(); setTimeout(() => { if (!$("#yatModal").classList.contains("on")) u3Acilis(); }, 2600);   // Mükemmel 3'lü Gün açılış ekranı (günde 1 kez)
   $("#anZoom").onclick = () => $("#anZoom").classList.remove("on");
   loadAnaliz(); setInterval(loadAnaliz, 300000);
   setInterval(() => { const st = ANS.map(anArch).join(); if (st !== renderAnaliz.st){ renderAnaliz.st = st; renderAnaliz.sel = false; renderAnaliz(); } }, 60000);
@@ -2133,7 +2311,7 @@ async function adayKodCoz(v){
 }
 function setAdayGoz(on){
   try{ sessionStorage.setItem("joy_adaygoz", on?"1":"0"); }catch(e){}
-  buildNav(); renderSigs(); renderTrial(true); renderYat(); adayUi(); renderCopyTrade();
+  buildNav(); renderSigs(); renderTrial(true); renderYat(); adayUi(); renderCopyTrade(); renderUclu();
   const cur = (document.querySelector("section.on")||{}).id || "s-home"; applyLocks(cur.replace("s-",""));
   if ($("#smGoz")) { $("#smGoz").textContent = on ? "↩ VIP görünüme dön" : "👁 Aday gözüyle bak"; $("#smGoz").classList.toggle("goz-on", on); }
 }
